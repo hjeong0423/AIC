@@ -65,7 +65,6 @@
     box-shadow: 0 4px 22px rgba(0, 0, 0, 0.04);
     border-radius: 9px;
 
-    background: #6a722d;
     text-align: center;
     font-weight: 500;
     font-size: 17px;
@@ -99,6 +98,13 @@
     font-size: 17px;
     letter-spacing: 0.1em;
 }
+
+.table-head-hk {
+    background: #af074c;
+    color: beige;
+}
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 /* end of hk */
 
 .content-container .result-table,

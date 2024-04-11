@@ -57,7 +57,40 @@ a {
     color: var(--point-color);
  }
 
-/* ----- page  --------- */
+ .expandable {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .expandable .header {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .expandable .header .button {
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .expandable .header .button:hover {
+    background-color: red;
+  }
+  
+  .expandable .content {
+    display: none;
+  }
+  
+  .expandable:hover .content {
+    display: block;
+  }
+  /* ----- page  --------- */
 
 /* ---- 반응형 코딩 -----*/
 @media screen and (max-width: 768px) {

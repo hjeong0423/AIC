@@ -27,7 +27,7 @@
         <ul class="menu_list">
             <li><a href="#">부동산세금계산기</a></li>
             <li><a href="#">금융계산기</a></li>
-            <li><a href="#">상황별계산리포트</a></li>
+            <li><a href="inheritSelfReport_1.html">상속세 셀프</a></li>
             <li><a href="post-cal/post-cal.html">포스팅 + 계산기</a></li>
         </ul>
         <a href="#" class="toggle_bar"><i class="fa-solid fa-bars"></i></a>
@@ -43,7 +43,6 @@
                 <div class="gt-page-content">
                     <div class="gt-content content-container">
                         <div class="row">
-                            <div class="cover-hk">
                             <h1 class="col-12 text-center">
                                 세금 컨설팅 보고서
                             </h1>
@@ -61,7 +60,6 @@
                             <div class="col-12 inform text-center">
                                 <p>본 보고서는 작성일 현재의 세법과 기본전제사항을 기준으로 <strong>참고목적</strong>으로 작성되었습니다.<br>
                                     <strong>실제의사결정 및 세금신고는 반드시 세무전문가와 상담하시길</strong> 바랍니다. </p>
-                            </div>
                             </div>
                         </div>
 
@@ -161,7 +159,7 @@
                                     <h5 class="">[증여시 자녀(수증자)의 납부세액] </h5>
                                     <div class="pt-3 table">
                                         <table class="table">
-                                            <thead class="table-warning">
+                                            <thead class="table-head-hk">
                                             <tr>
                                                 <th colspan="2" class="text-center">구분</th>
                                                 <th><b>납부 세액</b></th>
@@ -359,6 +357,65 @@
                                 </ul>
                             </div>
 
+
+
+                            <div class="col-12 pt-5">
+
+                                <p>
+                                  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    Link with href
+                                  </a>
+                                  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    Button with data-bs-target
+                                  </button>
+                                </p>
+                                <div class="collapse" id="collapseExample">
+                                  <div class="card card-body">
+                                    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                                  </div>
+                                </div>
+                                
+                                <p>
+                                  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
+                                    Toggle width collapse
+                                  </button>
+                                </p>
+                                <div style="min-height: 120px;">
+                                  <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                                    <div class="card card-body" style="width: 300px;">
+                                      This is some placeholder content for a horizontal collapse. It's hidden by default and shown when triggered.
+                                    </div>
+                                  </div>
+                                </div>
+                                
+                                </div>
+
+
+                                <div class="expandable">
+                                    <div class="header">
+                                      <div class="button">Expand</div>
+                                    </div>
+                                    <div class="content">
+                                      This is the content.
+                                    </div>
+                                  </div>
+
+
+                                  <div id="first-element">First element</div>
+                                  <div id="second-element">Second element</div>
+                                  
+                                  <style>
+                                  #first-element {
+                                    z-index: 1;
+                                  }
+                                  
+                                  #second-element {
+                                    z-index: 2;
+                                  }
+                                  </style>
+
+
+
                             <div class="col-12 pt-5">
                                 <h4>5. 중요 참고 사항</h4>
                                 <ul class="num-list">
@@ -440,7 +497,9 @@
   <!-- page end -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js" integrity="sha384-gdQErvCNWvHQZj6XZM0dNsAoY4v+j5P1XDpNkcM3HJG1Yx04ecqIHk7+4VBOCHOG" crossorigin="anonymous"></script><script src="dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js" integrity="sha384-gdQErvCNWvHQZj6XZM0dNsAoY4v+j5P1XDpNkcM3HJG1Yx04ecqIHk7+4VBOCHOG" crossorigin="anonymous"></script>
+    <script src="dashboard.js"></script>
 
 </body>
 </html>
