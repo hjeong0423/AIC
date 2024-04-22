@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>상속세 계산기 - 입력 선택</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .input-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .input-list li {
+            margin-bottom: 10px;
+        }
+        .input-list label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>상속세 계산기 - 입력 선택</h1>
+    <form action="calculate.php" method="post">
+        <ul class="input-list">
+            <li>
+                <label>
+                    <input type="checkbox" name="inputs[]" value="피상속인 재산"> 피상속인 재산
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="inputs[]" value="피상속인 부채"> 피상속인 부채
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="inputs[]" value="상속인 수"> 상속인 수
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="inputs[]" value="상속 재산가액"> 상속 재산가액
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="inputs[]" value="과세표준"> 과세표준
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="inputs[]" value="세율"> 세율
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="inputs[]" value="세액공제"> 세액공제
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="inputs[]" value="납부세액"> 납부세액
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="inputs[]" value="영년가산세"> 영년가산세
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="checkbox" name="inputs[]" value="자진납부세액"> 자진납부세액
+                </label>
+            </li>
+        </ul>
+        <div style="text-align: center;">
+            <button type="submit">다음</button>
+        </div>
+    </form>
+</body>
+</html>
