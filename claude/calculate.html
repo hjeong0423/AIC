@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>상속세 계산기 - 입력</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .input-group input {
+            width: 200px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>상속세 계산기 - 입력</h1>
+    <div id="input-container"></div>
+    <div style="text-align: center;">
+        <button onclick="calculateInheritanceTax()">계산하기</button>
+    </div>
+    <div id="result-container"></div>
+
+    <script>
+        // 입력 항목 배열
+        const inputFields = {
+            "피상속인 재산": "피상속인 재산 가액을 입력하세요.",
+            "피상속인 부채": "피상속인 부채 금액을 입력하세요.",
+            "상속인 수": "상속인 수를 입력하세요.",
+            "상속 재산가액": "상속 재산가액을 입력하세요.",
+            "과세표준": "과세표준 금액을 입력하세요.",
+            "세율": "세율(%)을 입력하세요.",
+            "세액공제": "세액공제 금액을 입력하세요.",
+            "납부세액": "납부세액을 입력하세요.",
+            "영년가산세": "영년가산세 금액을 입력하세요.",
+            "자진납부세액": "자진납부세액을 입력하세요."
+        };
+
+
+        // 입력 필드 생성 함수
+        function createInputField(field, label) {
+            const inputGroup = document.createElement('div');
+            inputGroup.classList.add('input-group');
+
+            const labelElement = document.createElement('label');
+            labelElement.textContent = label;
+            inputGroup.appendChild(labelElement);
+
+            const inputElement = document.createElement('input');
+            inputElement.type = 'text';
+            inputElement.id = field;
+            inputElement.name = field;
+            inputGroup.appendChild(inputElement);
+            alert("1");
+
+            return inputGroup;
+        }
+/*
+        // 선택한 입력 항목 출력
+        const inputContainer = document.getElementById('input-container');
+        for (const field in inputFields) {
+            if (selectedInputs.includes(field)) {
+                const inputField = createInputField(field, inputFields[field]);
+                inputContainer.appendChild(inputField);
+            }
+        }
+*/
+        // 상속세 계산 함수
+        function calculateInheritanceTax() {
+            const resultContainer = document.getElementById('result-container');
+            resultContainer.innerHTML = ''; // 기존 결과 지우기
+
+            const inputValues = {};
+            for (const field of selectedInputs) {
+                const input = document.getElementById(field);
+                inputValues[field] = input.value;
+            }
+
+            // 여기에 상속세 계산 로직 추가
+            const result = '계산 결과: ...';
+
+            const resultElement = document.createElement('p');
+            resultElement.textContent = result;
+            resultContainer.appendChild(resultElement);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+        // 선택한 입력 항목 가져오기
+        const selectedInputs = JSON.parse(localStorage.getItem('selectedInputs')) || [];
+alert(selectedInputs);
+        // 선택한 입력 항목 출력
+        const inputContainer = document.getElementById('input-container');
+  alert("1");
+        for (const field in inputFields) {
+//            if (selectedInputs.includes(field)) {
+            const inputField = createInputField(field, inputFields[field]);
+            inputContainer.appendChild(inputField);
+//            }
+        }
+        });
+    </script>
+</body>
+</html>
