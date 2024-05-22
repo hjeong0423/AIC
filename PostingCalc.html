@@ -24,10 +24,10 @@
             <a href="#">AI Calculator</a>
         </div>
         <ul class="menu_list">
-            <li><a href="index.html">세금컨설팅보고서</a></li>
-            <li><a href="test.html">ux/ui test</a></li>
+            <li><a href="index.html">포스트계산기 게시판</a></li>
+            <li><a href="test.html">포스트계산기 게시판2</a></li>
             <li><a href="self.html">상속세 셀프</a></li>
-            <li><a href="post-cal/post-cal.html">포스팅 + 계산기</a></li>
+            <li><a href="PostingCalc.html">포스팅 + 계산기</a></li>
         </ul>
         <a href="#" class="toggle_bar"><i class="fa-solid fa-bars"></i></a>
     </cal_menu>
@@ -125,16 +125,17 @@
         var inheritTax = Math.floor(calTax - calTax*0.03); //사전납입 공제율3%
         var inheritTax_b = Math.floor(calTax_b - calTax_b*0.03); //사전납입 공제율3%
         var taxSave = Math.max(0, inheritTax_b - inheritTax);
-        alert(spouseDedct);        
-        alert(inheritTax_b);
-        alert(inheritTax);
-        alert(taxSave);
+//        alert(spouseDedct);        
+//        alert(inheritTax_b);
+//        alert(inheritTax);
+//        alert(taxSave);
         
         //계산결과 출력
         document.getElementById('inheritTax_b').textContent = inheritTax_b.toLocaleString();   //상속세
         document.getElementById('inheritTax').textContent = inheritTax.toLocaleString();   //상속세
         document.getElementById('spouseDedct').textContent = spouseDedct.toLocaleString();   //배우자상속공제액
         document.getElementById('finDedct').textContent = finDedct.toLocaleString();   //금융공제액
+        document.getElementById('alongDedct').textContent = alongDedct.toLocaleString();   //금융공제액
         document.getElementById('taxSave').textContent = taxSave.toLocaleString();   //절세액
     }
 
@@ -180,7 +181,7 @@
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
-  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">특히 <b>배우자상속공제를 최대한 활용하는 전략이 중요</b>하다. 이 공제를 통해 배우자는 최소 5억 원을 공제받을 수 있으며, 법정 상속분과 실제 상속받은 금액을 기준으로 최대 30억 원까지 공제받을 수 있다. 어머니는 아버지로부터 받은 10년 이내 사전증여 금액은 0원이다. 이 경우 김대한씨의 어머니는 배우자상속공제 한도가 <b id="spouseDedct">6억원</b>이 된다.</span></span></span></span></span></p>
+  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">특히 <b>배우자상속공제를 최대한 활용하는 전략이 중요</b>하다. 이 공제를 통해 배우자는 최소 5억 원을 공제받을 수 있으며, 법정 상속분과 실제 상속받은 금액을 기준으로 최대 30억 원까지 공제받을 수 있다. 어머니는 아버지로부터 받은 10년 이내 사전증여 금액은 0원이다. 이 경우 김대한씨의 어머니는 배우자상속공제 한도가 <b id="spouseDedct">6억</b>원이 될 수 있다.</span></span></span></span></span></p>
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
@@ -188,11 +189,11 @@
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
-  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><b><span style="line-height:125%">금융자산 상속공제도 중요한 절세 전략</span></b><span style="line-height:125%"> 중 하나다. 금융채무를 제외한 순금융자산 가액이 2천만 원 초과일 경우, 순금융 재산 가액의 20% 또는 2천만원 중 더 큰 금액으로 공제되므로 김대한 씨의 경우는 <b id="finDedct">6천만원</b>이 된다.</span></span></span></span></span></p>
+  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><b><span style="line-height:125%">금융자산 상속공제도 중요한 절세 전략</span></b><span style="line-height:125%"> 중 하나다. 금융채무를 제외한 순금융자산 가액이 2천만 원 초과일 경우, 순금융 재산 가액의 20% 또는 2천만원 중 더 큰 금액으로 공제되므로 김대한 씨의 경우는 <b id="finDedct">6천만</b>원이 된다.</span></span></span></span></span></p>
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
-  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">또한, 부모와 함께 거주한 경우 <b>동거주택상속공제</b>를 받을 수 있다. 김대한씨는 10년 이상 부모님과 1세대 1주택으로 상속받는 주택에 거주하였다. 이 경우 동거주택가격의 100%를 공제 받을 수 있는데, 다만 6억원을 한도로 한다. 따라서 김대한씨의 동거주택상속공제금액은 <b>6억원</b>이 된다.</span></span></span></span></span></p>
+  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">또한, 부모와 함께 거주한 경우 <b>동거주택상속공제</b>를 받을 수 있다. 김대한씨는 10년 이상 부모님과 1세대 1주택으로 상속받는 주택에 거주하였다. 이 경우 동거주택가격의 100%를 공제 받을 수 있는데, 다만 6억원을 한도로 한다. 따라서 김대한씨의 동거주택상속공제금액은 <b id="alongDedct">6억</b>원이 된다.</span></span></span></span></span></p>
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   

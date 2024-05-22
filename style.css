@@ -59,6 +59,49 @@ input {
     color: var(--point-color);
  }
 
+ /* 포스팅 목록 */
+ .page-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+ .board {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.board_list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.board_list li {
+  border-bottom: 1px solid #ccc;
+}
+
+.board_list li:last-child {
+  border-bottom: none;
+}
+
+.board_list li a {
+  display: block;
+  padding: 10px;
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+  background-color: #f9f9f9;
+}
+
+.board_list li a:hover {
+  background-color: #e9e9e9;
+  color: #000;
+}
+/* 포스팅목록 end */
+
  .toggle_bar {
     display: none;
     position:absolute;
