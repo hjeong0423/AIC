@@ -10,15 +10,14 @@
     <title>AI Calculators</title>
     <script src="https://kit.fontawesome.com/4066a8ec03.js" crossorigin="anonymous"></script>
     <script src="main.js" defer></script>
-
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-
+    
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="consulting-result.css">
-
-     
 </head>
 <body>
+
     <cal_menu class="main_menu">
         <div class="menu_logo">
             <i class="fa-solid fa-calculator"></i>
@@ -49,7 +48,6 @@
         const finValue = parseFloat(document.getElementById('finValue').value.replace(/,/g, '')) || 0; //금융상속분
         const rentValue = parseFloat(document.getElementById('rentValue').value.replace(/,/g, '')) || 0; //아파트 전세보증금-부채
         const fnrl_fee = parseFloat(document.getElementById('fnrl_fee').value.replace(/,/g, '')) || 0; //장례비용
-        var inheritTax;
 
         //---1. 총 상속액
         const totalValue = aptMarketValue + finValue;
@@ -63,13 +61,17 @@
         var tax_price = totalValue - fnrl_fee - rentValue;
         var dct_tax_price = totalValue - rentValue; //공제용 상속가액은 장례비용제외
 
-        //상속공제액 계산 totalDedct = overallDedct + spouseDedct + finDedct
+        //after 상속공제액 계산 totalDedct = overallDedct + spouseDedct + finDedct + alongDedct
+        //before 상속공제액 계산 totalDedct_b = overallDeduct + spouseDedct_b
         var overallDedct = 0; //인적공제 및 일괄공제
         if(is_spouse > 0 && siblingNum == 0 ) {overallDedct = 200000000;} //여기는 해당없지만 일단 입력. 배우자 단독공제
         if(siblingNum > 0) {overallDedct = 500000000;} //자녀가 있는경우 일괄공제 5억 적용
 
-        var spouseShare = 0, spouseDedct = 0; //배우자없는경우 배우자공제=0;
+
+        var spouseShare = 0, spouseDedct = 0, spouseDedct_b = 0; //배우자없는경우 배우자공제=0;
         if (is_spouse == 1) { //배우자 존재할 경우
+            spouseDedct_b = 500000000; //법적상속분, 실제상속분 고려하지 않음
+
             spouseShare = 1.5/(1.5 + siblingNum);
             let s1 = dct_tax_price; //배우자가 최대 상속받았다고 가정
             let s2 = Math.floor(dct_tax_price*spouseShare); //배우자의 법정상속분
@@ -78,17 +80,23 @@
             //5억이하이면 5억으로
             if(spouseDedct < 500000000) {spouseDedct = 500000000;}
         }
-        
-        var finDedct = finValue; //금융공제.은행빚이있는경우차감
-        if(finValue > 20000000) {finDedct = 20000000;}
-        else if(finValue > 100000000) {finDedct = finValue*0.2;}
-        else if(finValue > 1000000000) {finDedct = 200000000;}
 
-        var totalDedct = overallDedct + spouseDedct + finDedct;
+        var finDedct = finValue; //금융공제.은행빚이있는경우차감
+        if(finValue > 1000000000) {finDedct = 200000000;}
+        else if(finValue > 100000000) {finDedct = finValue*0.2;}
+        else if(finValue > 20000000) {finDedct = 20000000;}
+
+        var alongDedct = 0; //동거주택상속공제
+        alongDedct = Math.min(aptMarketValue, 600000000);
+
+
+        var totalDedct = overallDedct + spouseDedct + finDedct + alongDedct;
+        var totalDedct_b = overallDedct + spouseDedct_b;
 
         //--3. 과세표준
         var taxBase = Math.max(0, tax_price - totalDedct);
- 
+        var taxBase_b = Math.max(0, tax_price - totalDedct_b);
+
         //세율
         var r =0,acc=0;
         if(taxBase <= 100000000){r = 0.1;acc = 0;} else
@@ -97,14 +105,37 @@
         if(taxBase <= 3000000000){r = 0.4;acc = 160000000;} else
         if(taxBase > 3000000000){r = 0.5;acc = 460000000;}
         
+        //세율 - 기본공제시
+        var r_b =0,acc_b=0;
+        if(taxBase_b <= 100000000){r_b = 0.1;acc_b = 0;} else
+        if(taxBase_b <= 500000000){r_b = 0.2;acc_b = 10000000;} else
+        if(taxBase_b <= 1000000000){r_b = 0.3;acc_b = 60000000;} else
+        if(taxBase_b <= 3000000000){r_b = 0.4;acc_b = 160000000;} else
+        if(taxBase_b > 3000000000){r_b = 0.5;acc_b = 460000000;}
+//alert(taxBase_b);
+//alert(r_b);
+//alert(acc_b);
+ 
         //---4. 산출세액
         var calTax = taxBase*r - acc;
+        var calTax_b = taxBase_b*r_b - acc_b;
+//alert(calTax_b);
 
-        //--5. 납부세액
+        //--5. 결정세액
         var inheritTax = Math.floor(calTax - calTax*0.03); //사전납입 공제율3%
+        var inheritTax_b = Math.floor(calTax_b - calTax_b*0.03); //사전납입 공제율3%
+        var taxSave = Math.max(0, inheritTax_b - inheritTax);
+        alert(spouseDedct);        
+        alert(inheritTax_b);
+        alert(inheritTax);
+        alert(taxSave);
         
         //계산결과 출력
-        document.getElementById('inheritTax').textContent = inheritTax.toLocaleString();    
+        document.getElementById('inheritTax_b').textContent = inheritTax_b.toLocaleString();   //상속세
+        document.getElementById('inheritTax').textContent = inheritTax.toLocaleString();   //상속세
+        document.getElementById('spouseDedct').textContent = spouseDedct.toLocaleString();   //배우자상속공제액
+        document.getElementById('finDedct').textContent = finDedct.toLocaleString();   //금융공제액
+        document.getElementById('taxSave').textContent = taxSave.toLocaleString();   //절세액
     }
 
   </script>
@@ -121,21 +152,21 @@
 
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
-  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">서울에 거주하는 김대한 씨는 한달 전 아버지를 잃고 상속세 계산을 앞두고 있다. 현재 김대한 씨의 가족 구성원으로는 어머니는
+  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">서울에 거주하는 김대한 씨는 한달 전 아버지를 잃고 상속세 계산을 앞두고 있다. 현재 김대한 씨의 어머니가 
     
-        <select style="border: none; background-color: rgb(252, 239, 223); display: inline;"  id="is_spouse" oninput="formatNumber(this)" onchange="calculate()">
-        <option selected value="1"> 살아계시며</option>
-        <option value ="0" > 사별했으며</option>
+        <select style="border: none; background-color: rgb(243, 239, 238); display: inline;"  id="is_spouse" oninput="formatNumber(this)" onchange="calculate()">
+        <option selected value="1"> 법적 상속자이며</option>
+        <option value ="0" > 상속대상이 아니며</option>
         </select>
     
     , 대한씨를 포함하여 상속을 포기하지 않은 형제자매는 총 <input type="text" id="siblingNum" oninput="formatNumber(this)" onchange="calculate()" value="3">명이 있다. 김대한 씨의 아버지가 돌아가실 당시, 아버지 명의로 된 자산은 서울에 위치한 시세 <input type="text" id="aptMarketValue" oninput="formatNumber(this)" onchange="calculate()" value="2,000,000,000">원 아파트 1채와 은행 예금 <input type="text" id="finValue" oninput="formatNumber(this)" onchange="calculate()" value="300,000,000">원이다. 해당 아파트에는 전세 세입자가 살고 있으며, 보증금은 <input type="text" id="rentValue" oninput="formatNumber(this)" onchange="calculate()" value="500,000,000">원이다.</span></span></span></span></span></p>
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
-  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">아버지의 장례비용으로는 총 <input type="text" id="fnrl_fee" oninput="formatNumber(this)" onchange="calculate()" value="5,000,000">원이 소요되었으며, 사전 10년 이내 자녀에게 증여한 재산은 없는 상태다. 이러한 상황에서 김대한 씨 가족이 부담해야 할 상속세는 총 <b id="inheritTax">196,425,000</b>원으로 계산되었다.</span></span></span></span></span></p>
+  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">아버지의 장례비용으로는 총 <input type="text" id="fnrl_fee" oninput="formatNumber(this)" onchange="calculate()" value="5,000,000">원이 소요되었으며, 사전 10년 이내 자녀에게 증여한 재산은 없는 상태다. 이러한 상황에서 김대한 씨 가족이 부담해야 할 상속세는 총 <b id="inheritTax_b">173,145,000</b>원으로 계산되었다.</span></span></span></span></span></p>
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
-  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">상속세 계산은 상속 개시일 기준으로 고인의 재산을 평가하고, 여기서 부채와 장례비용을 제외한 순재산 가액에 따라 세율이 적용된다. 이 경우, 고인 명의의 아파트와 예금이 주요 자산이며, 고인의 부채나 기타 공제 요소가 제한적이라 상대적으로 높은 상속세가 부과된 것으로 보인다.</span></span></span></span></span></p>
+  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">상속세 계산은 상속 개시일 기준으로 고인의 재산을 평가하고, 여기서 부채와 장례비용을 제외한 순재산 가액에 따라 세율이 적용된다. 이 경우, 고인 명의의 아파트와 예금이 주요 자산이며, 고인의 부채나 기타 공제 요소가 제한적이라 상대적으로 높은 상속세가 부과될 수도 있다.</span></span></span></span></span></p>
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
@@ -149,7 +180,7 @@
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
-  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">특히 <b>배우자상속공제를 최대한 활용하는 전략이 중요</b>하다. 이 공제를 통해 배우자는 최소 5억 원을 공제받을 수 있으며, 법정 상속분과 실제 상속받은 금액을 기준으로 최대 30억 원까지 공제받을 수 있다. 어머니는 아버지로부터 받은 10년 이내 사전증여 금액은 0원이다. 이 경우 김대한씨의 어머니는 배우자상속공제 한도가 <b>6억원</b>으로 늘어난다.</span></span></span></span></span></p>
+  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">특히 <b>배우자상속공제를 최대한 활용하는 전략이 중요</b>하다. 이 공제를 통해 배우자는 최소 5억 원을 공제받을 수 있으며, 법정 상속분과 실제 상속받은 금액을 기준으로 최대 30억 원까지 공제받을 수 있다. 어머니는 아버지로부터 받은 10년 이내 사전증여 금액은 0원이다. 이 경우 김대한씨의 어머니는 배우자상속공제 한도가 <b id="spouseDedct">6억원</b>이 된다.</span></span></span></span></span></p>
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
@@ -157,7 +188,7 @@
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
-  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><b><span style="line-height:125%">금융자산 상속공제도 중요한 절세 전략</span></b><span style="line-height:125%"> 중 하나다. 금융채무를 제외한 순금융자산 가액이 2천만 원 초과일 경우, 순금융 재산 가액의 20% 또는 2천만원 중 더 큰 금액으로 공제되므로 김대한 씨의 경우는 <b>6천만원</b>이 된다.</span></span></span></span></span></p>
+  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><b><span style="line-height:125%">금융자산 상속공제도 중요한 절세 전략</span></b><span style="line-height:125%"> 중 하나다. 금융채무를 제외한 순금융자산 가액이 2천만 원 초과일 경우, 순금융 재산 가액의 20% 또는 2천만원 중 더 큰 금액으로 공제되므로 김대한 씨의 경우는 <b id="finDedct">6천만원</b>이 된다.</span></span></span></span></span></p>
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
@@ -169,7 +200,7 @@
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
-  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">김대한씨 가족은 이러한 절세 방법을 통하여 원래 예상되었던 금액에서 </span><span lang="EN-US"><span style="line-height:125%">167,750,000</span></span><span style="line-height:125%">원을 절세하여 최종적으로 3,395,000원을 납부하게 되었다.</span></span></span></span></span></p>
+  <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify"><span style="font-size:16px;"><span style="font-family:Nanum Square;"><span style="line-height:125%"><span style="color:black"><span style="line-height:125%">김대한씨 가족은 이러한 절세 방법을 통하여 원래 예상되었던 금액에서 </span><span lang="EN-US"><span style="line-height:125%"><b id="taxSave">169,750,000</b></span></span><span style="line-height:125%">원을 절세하여 최종적으로 <b id="inheritTax">3,395,000</b>원을 납부하게 되었다.</span></span></span></span></span></p>
   
   <p class="a" style="margin:0cm 0cm 0.0001pt; text-align:justify">&nbsp;</p>
   
@@ -188,7 +219,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js" integrity="sha384-gdQErvCNWvHQZj6XZM0dNsAoY4v+j5P1XDpNkcM3HJG1Yx04ecqIHk7+4VBOCHOG" crossorigin="anonymous"></script>
-    <script src="dashboard.js"></script>
 
 </body>
 </html>

@@ -23,7 +23,7 @@ input {
   width: 130px;
   padding-right: 5px;
   display: inline-flex; /* 또는 display: block; */
-  background-color: rgb(252, 239, 223);
+  background-color: rgb(243, 239, 238);
 }
 
 /* ------- menu bar ------- */
