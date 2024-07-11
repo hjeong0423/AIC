@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상속세 셀프 절세 계산기 I - AI 계산기 블로그</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4066a8ec03.js" crossorigin="anonymous"></script>
+    <style>
+        /* 이전 스타일 유지 */
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fa-solid fa-calculator"></i> AI 계산기 블로그</h1>
+    </header>
+    
+    <nav>
+        <a href="#">홈</a>
+        <a href="#">상속세 보고서</a>
+        <a href="#">포스트계산기 게시판</a>
+        <a href="#">포스팅 + 계산기</a>
+    </nav>
+
+    <div class="post-content">
+        <h1>상속세 셀프 절세 계산기 I</h1>
+        
+        <form action="claude_result.html" method="get" id="inheritanceForm">
+            <p>부모님 중 한 분이 먼저 돌아가신 경우를 먼저 알아보도록 하겠습니다.</p>
+            
+            <label for="spouse">배우자 생존 여부:</label>
+            <input type="checkbox" id="spouse" name="spouse" value="1"><br>
+
+            <label for="children">상속인이 되는 자녀의 수:</label>
+            <input type="number" id="children" name="children" value="2"><br>
+
+            <label for="house_value">주택 거래가액:</label>
+            <input type="number" id="house_value" name="house_value" value="10000000"><br>
+
+            <label for="funeral_facility">봉안시설 등에 소요된 금액:</label>
+            <input type="number" id="funeral_facility" name="funeral_facility" value="50000000"><br>
+
+            <label for="funeral_cost">총 장례비용:</label>
+            <input type="number" id="funeral_cost" name="funeral_cost" value="500000"><br>
+
+            <h2>추가자산, 채무 및 비용의 입력</h2>
+            
+            <ul class="checkbox-list">
+                <li>
+                    <input type="checkbox" id="building" name="building" class="toggle-input">
+                    <label for="building">비거주용 건물(대지포함)</label>
+                    <div class="input-block">
+                        <input type="number" name="building_value" placeholder="금액 입력">
+                        <textarea name="building_desc" placeholder="설명을 입력하세요"></textarea>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" id="farmland" name="farmland" class="toggle-input">
+                    <label for="farmland">농지</label>
+                    <div class="input-block">
+                        <input type="number" name="farmland_value" placeholder="금액 입력">
+                        <textarea name="farmland_desc" placeholder="설명을 입력하세요"></textarea>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" id="forest" name="forest" class="toggle-input">
+                    <label for="forest">임야(산)</label>
+                    <div class="input-block">
+                        <input type="number" name="forest_value" placeholder="금액 입력">
+                        <textarea name="forest_desc" placeholder="설명을 입력하세요"></textarea>
+                    </div>
+                </li>
+                <!-- 나머지 항목들도 위와 같은 형식으로 추가 -->
+            </ul>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button type="submit" style="padding: 10px 20px; font-size: 18px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">계산</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleInputs = document.querySelectorAll('.toggle-input');
+            
+            toggleInputs.forEach(function(input) {
+                input.addEventListener('change', function() {
+                    const inputBlock = this.parentNode.querySelector('.input-block');
+                    if (this.checked) {
+                        inputBlock.style.display = 'block';
+                    } else {
+                        inputBlock.style.display = 'none';
+                    }
+                });
+            });
+
+            // form 제출 시 처리
+            document.getElementById('inheritanceForm').addEventListener('submit', function(e) {
+                // 체크되지 않은 체크박스의 값을 제거
+                toggleInputs.forEach(function(input) {
+                    if (!input.checked) {
+                        const valueInput = input.parentNode.querySelector('input[type="number"]');
+                        const descTextarea = input.parentNode.querySelector('textarea');
+                        if (valueInput) valueInput.disabled = true;
+                        if (descTextarea) descTextarea.disabled = true;
+                    }
+                });
+
+                // 폼 제출 허용 (GET 방식으로 전송됨)
+            });
+        });
+    </script>
+</body>
+</html>

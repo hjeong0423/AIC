@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상속세 계산 결과 - AI 계산기 블로그</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4066a8ec03.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fa-solid fa-calculator"></i> AI 계산기 블로그</h1>
+    </header>
+
+    <h1>상속세 계산 결과</h1>
+
+    <div id="result">
+        <p>입력하신 내용을 기반으로 한 결과입니다:</p>
+        <table id="resultTable">
+            <thead>
+                <tr>
+                    <th>항목</th>
+                    <th>값</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 여기에 JavaScript로 결과를 동적으로 추가할 것입니다 -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleInputs = document.querySelectorAll('.toggle-input');
+            
+            toggleInputs.forEach(function(input) {
+                input.addEventListener('change', function() {
+                    const inputBlock = this.parentNode.querySelector('.input-block');
+                    if (this.checked) {
+                        inputBlock.style.display = 'block';
+                    } else {
+                        inputBlock.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        function calculate() {
+            const form = document.getElementById('inheritanceForm');
+            const formData = new FormData(form);
+            const resultTable = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
+
+            // 테이블 초기화
+            resultTable.innerHTML = '';
+
+            // 파라미터 매핑 (한글 이름으로 표시하기 위함)
+            const paramMapping = {
+                'spouse': '배우자 생존 여부',
+                'children': '상속인이 되는 자녀의 수',
+                'house_value': '주택 거래가액',
+                'funeral_facility': '봉안시설 등에 소요된 금액',
+                'funeral_cost': '총 장례비용',
+                'building': '비거주용 건물(대지포함)',
+                'building_value': '비거주용 건물 가액',
+                'building_desc': '비거주용 건물 설명',
+                'farmland': '농지',
+                'farmland_value': '농지 가액',
+                'farmland_desc': '농지 설명',
+                'forest': '임야(산)',
+                'forest_value': '임야 가액',
+                'forest_desc': '임야 설명'
+            };
+
+            // 폼 데이터 순회하며 테이블에 추가
+            for (const [key, value] of formData.entries()) {
+                if (value && value !== 'on') {  // 값이 있고 'on'이 아닌 경우에만 표시
+                    const row = resultTable.insertRow();
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    
+                    cell1.textContent = paramMapping[key] || key;  // 매핑된 이름이 있으면 사용, 없으면 키 그대로 사용
+                    cell2.textContent = value;
+
+                    // 체크박스 항목의 경우 '예/아니오'로 표시
+                    if (value === 'on') {
+                        cell2.textContent = '예';
+                    } else if (key === 'spouse' && value === '1') {
+                        cell2.textContent = '예';
+                    }
+                }
+            }
+
+            // 결과가 없는 경우 메시지 표시
+            if (resultTable.rows.length === 0) {
+                const row = resultTable.insertRow();
+                const cell = row.insertCell(0);
+                cell.colSpan = 2;
+                cell.textContent = '입력된 데이터가 없습니다.';
+            }
+
+            // 입력 페이지 숨기고 결과 페이지 표시
+            document.getElementById('inputPage').style.display = 'none';
+            document.getElementById('resultPage').style.display = 'block';
+        }
+
+        function goBack() {
+            // 결과 페이지 숨기고 입력 페이지 표시
+            document.getElementById('resultPage').style.display = 'none';
+            document.getElementById('inputPage').style.display = 'block';
+        }
+
+    </script>
+</body>
+</html>

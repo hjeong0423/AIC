@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상속세 셀프 절세 계산기 I - AI 계산기 블로그</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4066a8ec03.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #f4f4f4;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+        }
+        .post-content {
+            margin-top: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .checkbox-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .checkbox-list li {
+            margin-bottom: 10px;
+        }
+        .input-block {
+            margin-left: 20px;
+            margin-top: 10px;
+            display: none;
+        }
+        .input-block input[type="number"] {
+            width: 200px;
+            padding: 5px;
+        }
+        .input-block textarea {
+            width: 100%;
+            height: 60px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><i class="fa-solid fa-calculator"></i> AI 계산기 블로그</h1>
+    </header>
+    
+    <nav>
+        <a href="#">홈</a>
+        <a href="#">상속세 보고서</a>
+        <a href="#">포스트계산기 게시판</a>
+        <a href="#">포스팅 + 계산기</a>
+    </nav>
+
+    <div class="post-content">
+        <h1>상속세 셀프 절세 계산기 I</h1>
+        
+        <h2>추가자산, 채무 및 비용의 입력</h2>
+        
+        <ul class="checkbox-list">
+            <li>
+                <input type="checkbox" id="building" class="toggle-input">
+                <label for="building">비거주용 건물(대지포함)</label>
+                <div class="input-block">
+                    <input type="number" placeholder="금액 입력">
+                    <textarea placeholder="설명을 입력하세요"></textarea>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" id="farmland" class="toggle-input">
+                <label for="farmland">농지</label>
+                <div class="input-block">
+                    <input type="number" placeholder="금액 입력">
+                    <textarea placeholder="설명을 입력하세요"></textarea>
+                </div>
+            </li>
+            <li>
+                <input type="checkbox" id="forest" class="toggle-input">
+                <label for="forest">임야(산)</label>
+                <div class="input-block">
+                    <input type="number" placeholder="금액 입력">
+                    <textarea placeholder="설명을 입력하세요"></textarea>
+                </div>
+            </li>
+            <li><input type="checkbox" id="financial"> <label for="financial">금융자산 등 그외 상속재산 가액</label></li>
+            <li><input type="checkbox" id="debt"> <label for="debt">채무 및 공과금</label></li>
+            <li><input type="checkbox" id="spouse-gift"> <label for="spouse-gift">10년 이내 배우자 증여금액</label></li>
+            <li><input type="checkbox" id="child-gift"> <label for="child-gift">10년 이내 자녀 증여금액</label></li>
+            <li><input type="checkbox" id="other-gift"> <label for="other-gift">5년 이내 상속인외 증여금액(손자,손녀 등)</label></li>
+            <li><input type="checkbox" id="appraisal-fee"> <label for="appraisal-fee">감정평가수수료</label></li>
+            <li><input type="checkbox" id="pre-paid-tax"> <label for="pre-paid-tax">사전 증여 시 납부한 세액</label></li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleInputs = document.querySelectorAll('.toggle-input');
+            
+            toggleInputs.forEach(function(input) {
+                input.addEventListener('change', function() {
+                    const inputBlock = this.parentNode.querySelector('.input-block');
+                    if (this.checked) {
+                        inputBlock.style.display = 'block';
+                    } else {
+                        inputBlock.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
