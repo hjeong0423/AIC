@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
+    <title>AI Calculators</title>
+    <script src="https://kit.fontawesome.com/4066a8ec03.js" crossorigin="anonymous"></script>
+    <script src="main.js" defer></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="consulting-result.css">
+
+    <style>
+/*        body {
+            font-family: '맑은 고딕', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+
+body {
+            font-family: '맑은 고딕', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+*/
+        .cover {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 100px;
+        }
+        .company, .date {
+            text-align: right;
+            margin-top: 10px;
+        }
+        .footer {
+            margin-top: 50px;
+            font-size: 12px;
+            color: #666;
+        }
+        .footer strong {
+            color: #333;
+        }
+
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .post-content {
+            margin-top: 20px;
+        }
+        .subTitle {
+            color: #17212b;
+            font-size: 18px;
+            font-family:'Nanum Square';
+            font-weight: bold;
+        }
+        .checkbox-list {
+            list-style-type: none;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+
+        }
+        .checkbox-list li {
+            margin-bottom: 10px;
+            padding-left: 0;
+        }
+        .checkbox-caption {
+            width: 100%;
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: normal;
+            font-family:'Nanum Square';
+        }
+        .input-block {
+            margin-left: 20px;
+            margin-top: 10px;
+            display: none;
+        }
+        .input-block input[type="text"] {
+            width: 200px;
+            padding: 5px;
+ 
+            border: none;
+            border-bottom: 1px solid #ccc; /* 아래 밑줄 색상과 두께 지정 */
+            outline: none; /* 포커스 시 나타나는 외곽선 제거 */
+            text-align: right; /* 텍스트 우측 정렬 */
+            width: 130px;
+            padding-right: 5px;
+            display: inline-flex; /* 또는 display: block; */
+        }
+        .input-block textarea {
+            width: 100%;
+            height: 60px;
+            margin-top: 5px;
+        }
+/*        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+*/
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+ 
+            border: none;
+            border-bottom: 1px solid #ccc; /* 아래 밑줄 색상과 두께 지정 */
+            outline: none; /* 포커스 시 나타나는 외곽선 제거 */
+            text-align: right; /* 텍스트 우측 정렬 */
+            width: 130px;
+            padding-right: 5px;
+            display: inline-flex; /* 또는 display: block; */
+        }
+        label {
+            font-weight: normal;
+        }
+        #resultPage {
+            display: none;
+        }
+
+    </style>
+
+</head>
+<body>
+    <cal_menu class="main_menu">
+        <div class="menu_logo">
+            <i class="fa-solid fa-calculator"></i>
+            <a href="#">AI Calculator</a>
+        </div>
+        <ul class="menu_list">
+            <li><a href="inherit_report.html">상속세 보고서</a></li>
+            <li><a href="index.html">포스트계산기 게시판</a></li>
+              <li><a href="test.html">포스트계산기 게시판2</a></li>
+              <li><a href="PostingCalc.html">포스팅 + 계산기</a></li>
+          </ul>
+        <a href="#" class="toggle_bar"><i class="fa-solid fa-bars"></i></a>
+    </cal_menu>
+
+  <!--page begin -->
+
+<!--입력페이지 시작-->
+<div class="container"> <!-- my-5 클래스 추가 -->
+    <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="post-content py-5"> <!-- py-5 클래스 추가 -->
+    
+
+    <div id="inputPage" class="post-content">
+
+  <form id="inheritanceForm">
+
+    <h1>상속세 셀프 절세 계산기 I</h1>
+
+  <p style="margin:0cm 0cm 10pt; text-align:justify">&nbsp;</p>
+  
+  <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%">부모님 중 한 분이 먼저 돌아가신 경우를 먼저 알아보도록 하겠습니다. 배우자가 생존<input type="text" id="spouse" name="spouse" value="1" style="display:none;">해 있으며, 상속인이 되는 자녀의 수는 <input type="text" id="children" name="children" oninput="formatNumber(this)" value="2">명이며, 주택은 1채만을 소유하고 있고&nbsp;사망시 거래가액은 <input type="text" id="house_value" name="house_value" oninput="formatNumber(this)" value="1,000,000,000" >원 입니다.</span></span></span></span></p>
+  
+  <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%">봉안시설 등에 소요된 금액은 <input type="text" id="funeral_facility" name="funeral_facility" oninput="formatNumber(this)" value="5,000,000">원이며, 이를 제외한 총 장례비용은 <input type="text" id="funeral_cost" name="funeral_cost" oninput="formatNumber(this)" value="5,000,000">원 입니다.</span></span></span></span></p>
+  
+  <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%">( &diams; 자산 및 부채 등의 가액은 사망일이 기준이 되며, 사망신고일이 아님을 유의하시기 바랍니다.)</span></span></span></span></p>
+  
+  <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify">&nbsp;</p>
+  
+  <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%; font-weight: bold;">기타 상속재산이 있는 경우에는 아래 해당항목을 클릭하여 입력하여 주시면 됩니다.</span></span></span></span></p>
+  
+  <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%; font-weight: bold;">* 추가자산, 채무 및 비용의 입력</span></span></span></span></p>
+  
+  <ul class="checkbox-list">
+    <li>
+        <input type="checkbox" id="building" name="building" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="building">비거주용 건물(대지포함)</label>
+        <div class="input-block">
+            <input type="text" name="building_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+                <ul class="checkbox-caption">
+                    <li>시가로 평가.</li>
+                    <li>감정평가가액이 있는 경우 감정가액.</li>
+                    <li>시가가 없는 경우 기준시가로 평가.</li>
+                    <li>고가의 건물의 경우, 2020년부터 기준시가로 과세하는 것에 대한 과세 형평성 문제가 제기되었습니다.</li>
+                    <li>국세청은 자체 감정평가예산을 배정하여 예상감정가와 시가의 차액이 10억을 넘거나 , 10%이상 차이가 나는 경우 감정평가를 하여 과세하고 있습니다.</li>
+                </ul>
+        </div>
+    </li>
+    <li>
+        <input type="checkbox" id="farmland" name="farmland" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="farmland">농지</label>
+        <div class="input-block">
+            <input type="text" name="farmland_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <ul class="checkbox-caption">
+                <li>실제 거래가액인 시가로 입력합니다.</li>
+                <li>시가는 감정평가액이 될 수도 있습니다.</li>
+                <li>시가가 없는 경우 공시지가를 입력합니다.</li>            
+            </ul>
+    </div>
+    </li>
+    <li>
+        <input type="checkbox" id="forest" name="forest" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="forest">임야(산)</label>
+        <div class="input-block">
+            <input type="text" name="forest_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <ul class="checkbox-caption">
+                <li>실제 거래가액인 시가로 입력합니다.</li>
+                <li>시가는 감정평가액이 될 수도 있습니다.</li>
+                <li>시가가 없는 경우 공시지가를 입력합니다.</li>            
+            </ul>
+        </div>
+    </li>
+    <li>
+        <input type="checkbox" id="financial" name="financial" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="financial">금융자산 등 그외 상속재산</label>
+        <div class="input-block">
+            <input type="text" name="financial_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <ul class="checkbox-caption">
+                <li>순금융재산의 가액이 2천만원 초과일 경우: 순금융재산 가액의 20% 혹은 2천만원 중 더 큰 금액이 공제됩니다. 단, 이 공제 금액은 최대 2억원까지입니다.</li>
+                <li>순금융재산의 가액이 2천만원 이하일 경우: 순금융재산의 전액이 과세가액에서 공제됩니다.</li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <input type="checkbox" id="debt" name="debt" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="debt">채무 및 공과금</label>
+        <div class="input-block">
+            <input type="text" name="debt_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+        </div>
+    </li>
+    <li>
+        <input type="checkbox" id="spouse-gift" name="spouse-gift" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="spouse-gift">10년 이내 배우자 증여금액</label>
+        <div class="input-block">
+            <input type="text" name="spouse-gift_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+        </div>
+    </li>
+    <li>
+        <input type="checkbox" id="child-gift" name="child-gift" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="child-gift">10년 이내 자녀 증여금액</label>
+        <div class="input-block">
+            <input type="text" name="child-gift_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+        </div>
+    </li>
+    <li>
+        <input type="checkbox" id="other-gift" name="other-gift" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="other-gift">5년 이내 상속인외 증여금액(손자,손녀 등)</label>
+        <div class="input-block">
+            <input type="text" name="other-gift_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+        </div>
+    </li>
+    <li>
+        <input type="checkbox" id="appraisal-fee" name="appraisal-fee" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="appraisal-fee">감정평가수수료</label>
+        <div class="input-block">
+            <input type="text" name="appraisal-fee_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <ul class="checkbox-caption">
+                <li>최대 한도액은 500만원입니다.</li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <input type="checkbox" id="pre-paid-tax" name="pre-paid-tax" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="pre-paid-tax">사전 증여 시 납부한 세액</label>
+        <div class="input-block">
+            <input type="text" name="pre-paid-tax_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+        </div>
+    </li>
+</ul>
+
+<div style="text-align: center; margin-top: 30px;">
+    <button type="button" onclick="getInput()" style="padding: 10px 20px; font-size: 18px; background-color: #73073450; color: white; border: none; cursor: pointer;">상속세 절세 보고서 보기</button>
+</div>
+
+<p style="margin:0cm 0cm 10pt; text-align:justify">&nbsp;</p>
+
+  </form>
+    </div> <!-- end of inputPage-->
+</div></div></div></div>
+
+
+<!--결과페이지 시작-->
+<div class="container"> <!-- my-5 클래스 추가 -->
+    <div class="row col-12">
+            <div class="col-md-8 offset-md-2">
+                <div class="post-content py-5"> <!-- py-5 클래스 추가 -->
+    <div id="resultPage" class="post-content">
+    <!--표지-->
+    <div class="cover">
+        <h1>상속세 절세 보고서 I</h1>
+        <div class="company">대한세무법인</div>
+        <div id="today" class="date">
+            <script>
+                const today = new Date();
+                const dateString = today.toLocaleDateString('ko-KR');
+                document.getElementById('today').innerHTML = dateString;
+            </script>
+        </div>
+        <div class="footer">
+            <p>본 보고서는 작성일 현재의 세법과 기본전제사항을 기준으로 <strong>참고목적</strong>으로 작성되었습니다.</p>
+            <p><strong>실제의사결정 및 세금신고는 반드시 세무전문가와 상담하시길 바랍니다.</strong></p>
+        </div>
+    </div>
+
+
+    <!--입력-->
+    <div class="col-12 pt-5" style="margin-top: 80px">
+        <div class="subTitle">1. 기본 전제사항 및 입력내용</div>
+    </div>
+    <div class="pt-5">
+        <table id="resultTable" class="result-table col-md-8">
+            <thead >
+            <tr class="table-head-hk">
+                <th>구 분</th>
+                <th>금 액</th>
+            </tr>
+            </thead>
+            <tbody>
+                <!-- 여기에 JavaScript로 결과를 동적으로 추가할 것입니다 -->
+            </tbody>
+        </table>
+    </div>
+
+<!--            <div id="result">
+        <table id="resultTable" style="border-collapse:collapse; width:367pt; border:none" width="490">
+            <colgroup>
+                <col style="width:54pt" width="72" />
+                <col style="width:38pt" width="51" />
+                <col style="width:161pt" width="215" />
+                <col style="width:114pt" width="152" />
+            </colgroup>
+		<thead height="32" style="height:24.0pt">
+			<td height="32" style="border:none; height:24.0pt; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:middle; white-space:nowrap">&nbsp;</td>
+			<td style="border:none; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:middle; white-space:nowrap">&nbsp;</td>
+			<td class="xl65" style="border:none; border-bottom:0.5pt solid #730734; background:#730734; text-align:center; border-top:0.5pt solid #730734; border-right:none; border-left:none; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:middle; white-space:nowrap"><span style="font-size:11pt"><span style="color:white"><span style="font-weight:700"><span style="font-style:normal"><span style="text-decoration:none"><span style="font-family:'맑은 고딕',monospace">구분</span></span></span></span></span></span></td>
+			<td class="xl65" style="border:none; border-bottom:0.5pt solid #730734; background:#730734; text-align:center; border-top:0.5pt solid #730734; border-right:none; border-left:none; padding-top:1px; padding-right:1px; padding-left:1px; vertical-align:middle; white-space:nowrap"><span style="font-size:11pt"><span style="color:white"><span style="font-weight:700"><span style="font-style:normal"><span style="text-decoration:none"><span style="font-family:'맑은 고딕',monospace">금액</span></span></span></span></span></span></td>
+		</thead>
+        <tbody>
+        </tbody>
+        </table>
+            </div> -->
+    <!--상속세-->
+ 
+    <!--취득세-->
+    <!--종부세-->
+    <!--양도세-->
+    <!--report 끝-->
+
+    <div style="text-align: center; margin-top: 30px;">
+        <button type="button" onclick="goBack()" style="padding: 10px 20px; font-size: 18px;    background-color: #730734; color: white; border: none; cursor: pointer;">입력 페이지로     돌아가기</button>
+    </div>
+
+    <p style="margin:0cm 0cm 10pt; text-align:justify">&nbsp;</p>
+
+    </div> <!-- end of resultPage -->
+
+            </div> <!-- py-5 클래스 추가 end-->
+        </div>
+    </div>
+
+</div> <!-- end of container my-5 클래스 추가 -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js" integrity="sha384-gdQErvCNWvHQZj6XZM0dNsAoY4v+j5P1XDpNkcM3HJG1Yx04ecqIHk7+4VBOCHOG" crossorigin="anonymous"></script>
+    <script src="dashboard.js"></script>
+    <script>
+        function formatNumber(input) {
+            // Remove commas and non-numeric characters
+            let numericValue = input.value.replace(/,/g, '').replace(/\D/g, '');
+            // Format with commas and update the input value
+            input.value = numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleInputs = document.querySelectorAll('.toggle-input');
+            
+            toggleInputs.forEach(function(input) {
+                input.addEventListener('change', function() {
+                    const inputBlock = this.parentNode.querySelector('.input-block');
+                    const inputBlockValue = this.parentNode.querySelector('.input-block-value');
+//                    alert(inputBlock);
+//                    alert(inputBlockValue);
+                    if (this.checked) {
+                        inputBlock.style.display = 'block';
+                    } else {
+                        inputBlock.style.display = 'none';
+                        
+                        // uncheck 시 입력 필드의 값을 0으로 설정
+                        inputBlockValue.value = '';
+//                        if (typeof formatNumber === 'function') {
+//                           formatNumber(inputBlockValue);
+//                        }   
+//                        inputBlockValue.dispatchEvent(new Event('input', { bubbles: true }));
+                    }
+                });
+            });
+        });
+
+        function getInput() {
+            const form = document.getElementById('inheritanceForm');
+            const formData = new FormData(form);
+            const resultTable = document.getElementById('resultTable').getElementsByTagName('tbody')[0];
+
+            // 테이블 초기화
+            resultTable.innerHTML = '';
+
+            // 파라미터 매핑 (한글 이름으로 표시하기 위함)
+            const paramMapping = {
+                'spouse': '배우자 상속대상 여부',
+                'children': '상속인이 되는 자녀의 수',
+                'house_value': '주택 거래가액',
+                'funeral_facility': '봉안시설 등에 소요된 금액',
+                'funeral_cost': '총 장례비용',
+                'building': '비거주용 건물(대지포함)',
+                'building_value': '비거주용 건물 가액',
+                'farmland': '농지',
+                'farmland_value': '농지 가액',
+                'forest': '임야(산)',
+                'forest_value': '임야 가액',
+                'financial': '금융자산 등 그외 상속재산',
+                'financial_value': '금융자산 등 그외 상속재산 가액',
+                'debt': '채무 및 공과금',
+                'debt_value': '채무 및 공과금 가액',
+                'spouse-gift': '10년 이내 배우자 증여금액',
+                'spouse-gift_value': '10년 이내 배우자 증여금액',
+                'child-gift': '10년 이내 자녀 증여금액',
+                'child-gift_value': '10년 이내 자녀 증여금액',
+                'other-gift': '5년 이내 상속인외 증여금액(손자,손녀 등)',
+                'other-gift_value': '5년 이내 상속인외 증여금액(손자,손녀 등)',
+                'appraisal-fee': '감정평가수수료',
+                'appraisal-fee_value': '감정평가수수료',
+                'pre-paid-tax': '사전 증여 시 납부한 세액',
+                'pre-paid-tax_value': '사전 증여 시 납부한 세액'
+
+            };
+
+            // 폼 데이터 순회하며 테이블에 추가
+            for (const [key, value] of Array.from(formData.entries()).slice(0)) {
+                if (value && value !== 'on') {  // 값이 있고 'on'이 아닌 경우에만 표시
+                    const row = resultTable.insertRow();
+//                    const cell0 = row.insertCell(0);
+//                    const cell00 = row.insertCell(1);
+                    const cell1 = row.insertCell(0);
+                    const cell2 = row.insertCell(1);
+                    
+                    cell1.textContent = paramMapping[key] || key;  // 매핑된 이름이 있으면 사용, 없으면 키 그대로 사용
+                    if(key === 'children') {
+                        cell2.textContent = value+'명';
+                    } else {
+                        cell2.textContent = value+'원';
+                    }                    
+
+                    // 체크박스 항목의 경우 '예/아니오'로 표시
+                    if (value === 'on') {
+                        cell2.textContent = '대상';
+                    } else if (key === 'spouse' && value === '1') {
+                        cell2.textContent = '대상';
+                    }
+
+                    //cell style
+//                    cell0.style.cssText = "border:none; height:24.0pt; padding-right:1px; padding-left:1px; vertical-align:middle; white-space:nowrap";
+//                    cell00.style.cssText = "border:none; height:24.0pt; padding-right:1px; padding-left:1px; vertical-align:middle; white-space:nowrap";
+                    cell1.style.cssText = "border:none; border-bottom:0.3pt solid #595959; border-top:none; border-right:none; border-left:none; padding: 10px 10px 10px 10px; vertical-align:middle; white-space:nowrap; font-size:11pt; color:black; font-weight:400; font-style:normal; text-decoration:none; font-family:'맑은 고딕',monospace;";
+                    cell2.style.cssText = "border:none; border-bottom:0.3pt solid #595959; border-top:none; border-right:none; border-left:none; padding: 10px 10px 10px 10px; vertical-align:middle; white-space:nowrap; font-size:11pt; color:black; font-weight:400; font-style:normal; text-decoration:none; font-family:'맑은 고딕',monospace;";
+                }
+            }
+
+            // 결과가 없는 경우 메시지 표시
+            if (resultTable.rows.length === 0) {
+                const row = resultTable.insertRow();
+                const cell = row.insertCell(0);
+                cell.colSpan = 2;
+                cell.textContent = '입력된 데이터가 없습니다.';
+            }
+
+            // 입력 페이지 숨기고 결과 페이지 표시
+            document.getElementById('inputPage').style.display = 'none';
+            document.getElementById('resultPage').style.display = 'block';
+        }
+
+        function goBack() {
+            // 결과 페이지 숨기고 입력 페이지 표시
+            document.getElementById('resultPage').style.display = 'none';
+            document.getElementById('inputPage').style.display = 'block';
+        }
+
+    function calculate() {
+        const is_spouse = parseFloat(document.getElementById('is_spouse').value.replace(/,/g, '')) || 0; //배우자존재여부 존재=1, 없음=0
+        const siblingNum = parseFloat(document.getElementById('siblingNum').value.replace(/,/g, '')) || 0; //자녀숫자
+        const aptMarketValue = parseFloat(document.getElementById('aptMarketValue').value.replace(/,/g, '')) || 0; //아파트 매매가액 시세
+        const finValue = parseFloat(document.getElementById('finValue').value.replace(/,/g, '')) || 0; //금융상속분
+        const rentValue = parseFloat(document.getElementById('rentValue').value.replace(/,/g, '')) || 0; //아파트 전세보증금-부채
+        const fnrl_fee = parseFloat(document.getElementById('fnrl_fee').value.replace(/,/g, '')) || 0; //장례비용
+
+        //---1. 총 상속액
+        const totalValue = aptMarketValue + finValue;
+
+        //장례비용 + 봉안지(추가500만원까지가능-코딩제외)
+        if(!fnrl_fee){fnrl_fee = 5000000;}
+        if(fnrl_fee < 5000000){ fnrl_fee = 5000000 }
+        if(fnrl_fee > 10000000){ fnrl_fee = 10000000 }
+
+        //---2. 상속가액
+        var tax_price = totalValue - fnrl_fee - rentValue;
+        var dct_tax_price = totalValue - rentValue; //공제용 상속가액은 장례비용제외
+
+        //after 상속공제액 계산 totalDedct = overallDedct + spouseDedct + finDedct + alongDedct
+        //before 상속공제액 계산 totalDedct_b = overallDeduct + spouseDedct_b
+        var overallDedct = 0; //인적공제 및 일괄공제
+        if(is_spouse > 0 && siblingNum == 0 ) {overallDedct = 200000000;} //여기는 해당없지만 일단 입력. 배우자 단독공제
+        if(siblingNum > 0) {overallDedct = 500000000;} //자녀가 있는경우 일괄공제 5억 적용
+
+
+        var spouseShare = 0, spouseDedct = 0, spouseDedct_b = 0; //배우자없는경우 배우자공제=0;
+        if (is_spouse == 1) { //배우자 존재할 경우
+            spouseDedct_b = 500000000; //법적상속분, 실제상속분 고려하지 않음
+
+            spouseShare = 1.5/(1.5 + siblingNum);
+            let s1 = dct_tax_price; //배우자가 최대 상속받았다고 가정
+            let s2 = Math.floor(dct_tax_price*spouseShare); //배우자의 법정상속분
+            let s3 = 3000000000; //배우자 최대상속액 30억
+            spouseDedct = Math.min(s1,s2,s3);
+            //5억이하이면 5억으로
+            if(spouseDedct < 500000000) {spouseDedct = 500000000;}
+        }
+
+        var finDedct = finValue; //금융공제.은행빚이있는경우차감
+        if(finValue > 1000000000) {finDedct = 200000000;}
+        else if(finValue > 100000000) {finDedct = finValue*0.2;}
+        else if(finValue > 20000000) {finDedct = 20000000;}
+
+        var alongDedct = 0; //동거주택상속공제
+        alongDedct = Math.min(aptMarketValue, 600000000);
+
+
+        var totalDedct = overallDedct + spouseDedct + finDedct + alongDedct;
+        var totalDedct_b = overallDedct + spouseDedct_b;
+
+        //--3. 과세표준
+        var taxBase = Math.max(0, tax_price - totalDedct);
+        var taxBase_b = Math.max(0, tax_price - totalDedct_b);
+
+        //세율
+        var r =0,acc=0;
+        if(taxBase <= 100000000){r = 0.1;acc = 0;} else
+        if(taxBase <= 500000000){r = 0.2;acc = 10000000;} else
+        if(taxBase <= 1000000000){r = 0.3;acc = 60000000;} else
+        if(taxBase <= 3000000000){r = 0.4;acc = 160000000;} else
+        if(taxBase > 3000000000){r = 0.5;acc = 460000000;}
+        
+        //세율 - 기본공제시
+        var r_b =0,acc_b=0;
+        if(taxBase_b <= 100000000){r_b = 0.1;acc_b = 0;} else
+        if(taxBase_b <= 500000000){r_b = 0.2;acc_b = 10000000;} else
+        if(taxBase_b <= 1000000000){r_b = 0.3;acc_b = 60000000;} else
+        if(taxBase_b <= 3000000000){r_b = 0.4;acc_b = 160000000;} else
+        if(taxBase_b > 3000000000){r_b = 0.5;acc_b = 460000000;}
+//alert(taxBase_b);
+//alert(r_b);
+//alert(acc_b);
+ 
+        //---4. 산출세액
+        var calTax = taxBase*r - acc;
+        var calTax_b = taxBase_b*r_b - acc_b;
+//alert(calTax_b);
+
+        //--5. 결정세액
+        var inheritTax = Math.floor(calTax - calTax*0.03); //사전납입 공제율3%
+        var inheritTax_b = Math.floor(calTax_b - calTax_b*0.03); //사전납입 공제율3%
+        var taxSave = Math.max(0, inheritTax_b - inheritTax);
+//        alert(spouseDedct);        
+//        alert(inheritTax_b);
+//        alert(inheritTax);
+//        alert(taxSave);
+        
+        //계산결과 출력
+        document.getElementById('inheritTax_b').textContent = inheritTax_b.toLocaleString();   //상속세
+        document.getElementById('inheritTax').textContent = inheritTax.toLocaleString();   //상속세
+        document.getElementById('spouseDedct').textContent = spouseDedct.toLocaleString();   //배우자상속공제액
+        document.getElementById('finDedct').textContent = finDedct.toLocaleString();   //금융공제액
+        document.getElementById('alongDedct').textContent = alongDedct.toLocaleString();   //금융공제액
+        document.getElementById('taxSave').textContent = taxSave.toLocaleString();   //절세액
+    }
+
+    </script>
+
+</body>
+</html>

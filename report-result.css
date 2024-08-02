@@ -83,7 +83,7 @@
 }
 .box ul{
     list-style-type: none;
-}
+    }
 
 .box li{
     font-size: 14px;
@@ -105,6 +105,14 @@
 }
 
 /* end of hk */
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+.table-head-hk th:nth-child(1) { width: 24%; }  /* 구 분 */
+.table-head-hk th:nth-child(2) { width: 23%; }  /* 10억 공제 */
+.table-head-hk th:nth-child(3) { width: 23%; }  /* 배우자 상속공제 활용 */
+.table-head-hk th:nth-child(4) { width: 30%; }  /* 참 고 */
 
 .result-table thead{
     background: #730734;
@@ -115,9 +123,20 @@
     color:white;
     vertical-align: middle;
     text-align: center;
-    padding-top:10px; 
-    padding-bottom:10px; 
-    font-size: 16px;
+    padding-top:5px; 
+    padding-bottom:5px; 
+    font-size: 14px;
+}
+.result-table tr{
+    font-size: 14px;
+    border-bottom:0.3pt solid #595959; 
+    border-top:none; 
+    border-right:none; 
+    border-left:none;
+}
+
+.result-table .table-tail-hk {
+    border-bottom: 2pt solid #730734;
 }
 /*.result-table tbody{
     padding-top:10px; 
@@ -127,18 +146,27 @@
     font-size: 12px;
 }
 */
-.content-container .description{
+.report-container .description{
+    margin-bottom:.0001pt; 
+    margin:0cm 0cm 10pt; 
+    text-align:justify;
     font-size: 15px;
+    line-height:180%;
+    font-family:'Nanum Square';
 }
 
-.content-container .description div:nth-child(n+2){
+.report-container .description div:nth-child(n+2){
     margin-top: 7px;
 }
 
-.content-container .description .small-text{
+.report-container .description .small-text{
     font-size: 13px;
 }
 
+.report-container .description .result-description {
+    color:#730734;
+    font-weight: bold;
+}
 .num-list{
     counter-reset: number 0;
     list-style:none;
