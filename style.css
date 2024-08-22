@@ -132,6 +132,68 @@ a {
   .expandable:hover .content {
     display: block;
   }
+
+  .fixedButton {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #730734;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+
+    width: 80%;  /* 화면 너비의 80%로 */
+/*    max-width: 80%;   화면 너비의 80%로 최대 너비 제한 */
+    white-space: nowrap;  /* 텍스트를 한 줄로 유지 */
+    overflow: hidden;  /* 너비를 넘어가는 내용 숨김 */
+    text-overflow: ellipsis;  /* 넘치는 텍스트를 ...으로 표시 */
+  }
+
+  .fixedButton:hover {
+    background-color: #9c0a47;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  }
+
+  /*--- floating button ----*/
+  #floatingButton {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #730734;
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+
+  #floatingButton:hover {
+    animation-play-state: paused;
+  }
+  /*--- end of floating button ----*/
+
   /* ----- page  --------- */
 
 /* ---- 반응형 코딩 -----*/

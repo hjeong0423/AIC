@@ -135,6 +135,10 @@ table {
     border-left:none;
 }
 
+.amount-align-hk {
+    text-align: right;
+    padding-right: 10px; 
+}
 .result-table .table-tail-hk {
     border-bottom: 2pt solid #730734;
 }
@@ -165,7 +169,7 @@ table {
 
 .report-container .description .result-description {
     color:#730734;
-    font-weight: bold;
+    font-size: 15px;
 }
 .num-list{
     counter-reset: number 0;

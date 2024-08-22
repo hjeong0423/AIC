@@ -183,7 +183,7 @@ body {
 
   <p style="margin:0cm 0cm 10pt; text-align:justify">&nbsp;</p>
   
-  <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%">부모님 중 한 분이 먼저 돌아가신 경우를 먼저 알아보도록 하겠습니다. 배우자가 생존<input type="text" id="spouse" name="spouse" value="1" style="display:none;">해 있으며, 상속인이 되는 자녀의 수는 <input type="text" id="children" name="children" oninput="formatNumber(this)" value="2">명이며, 주택은 1채만을 소유하고 있고&nbsp;사망시 거래가액은 <input type="text" id="house_value" name="house_value" oninput="formatNumber(this)" value="1,000,000,000" >원 입니다.</span></span></span></span></p>
+  <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%">부모님 중 한 분이 먼저 돌아가신 경우를 먼저 알아보도록 하겠습니다. 배우자가 생존<input type="text" id="spouse" name="spouse" value="1" style="display:none;">해 있으며, 상속인이 되는 자녀의 수는 <input type="text" id="children" name="children" oninput="formatNumber(this)" value="2">명이며, 주택은 1채만을 소유하고 있고&nbsp;사망시 거래가액은 <input type="text" id="house_value" name="house_value" oninput="formatNumber(this)" value="2,000,000,000" >원 입니다.</span></span></span></span></p>
   
   <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%">봉안시설 등에 소요된 금액은 <input type="text" id="funeral_facility" name="funeral_facility" oninput="formatNumber(this)" value="5,000,000">원이며, 이를 제외한 총 장례비용은 <input type="text" id="funeral_cost" name="funeral_cost" oninput="formatNumber(this)" value="5,000,000">원 입니다.</span></span></span></span></p>
   
@@ -200,7 +200,7 @@ body {
         <input type="checkbox" id="building" name="building" class="toggle-input">
         <label style="font-size: 16; font-family:Nanum Square;" for="building">비거주용 건물(대지포함)</label>
         <div class="input-block">
-            <input type="text" name="building_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <input type="text" id="building_value" name="building_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
                 <ul class="checkbox-caption">
                     <li>시가로 평가.</li>
                     <li>감정평가가액이 있는 경우 감정가액.</li>
@@ -214,7 +214,7 @@ body {
         <input type="checkbox" id="farmland" name="farmland" class="toggle-input">
         <label style="font-size: 16; font-family:Nanum Square;" for="farmland">농지</label>
         <div class="input-block">
-            <input type="text" name="farmland_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <input type="text" id="farmland_value" name="farmland_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
             <ul class="checkbox-caption">
                 <li>실제 거래가액인 시가로 입력합니다.</li>
                 <li>시가는 감정평가액이 될 수도 있습니다.</li>
@@ -226,7 +226,7 @@ body {
         <input type="checkbox" id="forest" name="forest" class="toggle-input">
         <label style="font-size: 16; font-family:Nanum Square;" for="forest">임야(산)</label>
         <div class="input-block">
-            <input type="text" name="forest_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <input type="text" id="forest_value" name="forest_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
             <ul class="checkbox-caption">
                 <li>실제 거래가액인 시가로 입력합니다.</li>
                 <li>시가는 감정평가액이 될 수도 있습니다.</li>
@@ -238,7 +238,7 @@ body {
         <input type="checkbox" id="financial" name="financial" class="toggle-input">
         <label style="font-size: 16; font-family:Nanum Square;" for="financial">금융자산 등 그외 상속재산</label>
         <div class="input-block">
-            <input type="text" name="financial_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <input type="text" id="financial_value" name="financial_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
             <ul class="checkbox-caption">
                 <li>순금융재산의 가액이 2천만원 초과일 경우: 순금융재산 가액의 20% 혹은 2천만원 중 더 큰 금액이 공제됩니다. 단, 이 공제 금액은 최대 2억원까지입니다.</li>
                 <li>순금융재산의 가액이 2천만원 이하일 경우: 순금융재산의 전액이 과세가액에서 공제됩니다.</li>
@@ -249,51 +249,51 @@ body {
         <input type="checkbox" id="debt" name="debt" class="toggle-input">
         <label style="font-size: 16; font-family:Nanum Square;" for="debt">채무 및 공과금</label>
         <div class="input-block">
-            <input type="text" name="debt_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <input type="text" id="debt_value" name="debt_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
         </div>
     </li>
     <li>
-        <input type="checkbox" id="spouse-gift" name="spouse-gift" class="toggle-input">
-        <label style="font-size: 16; font-family:Nanum Square;" for="spouse-gift">10년 이내 배우자 증여금액</label>
+        <input type="checkbox" id="spouse_gift" name="spouse_gift" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="spouse_gift">10년 이내 배우자 증여금액</label>
         <div class="input-block">
-            <input type="text" name="spouse-gift_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <input type="text" id="spouse_gift_value" name="spouse_gift_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
         </div>
     </li>
     <li>
-        <input type="checkbox" id="child-gift" name="child-gift" class="toggle-input">
-        <label style="font-size: 16; font-family:Nanum Square;" for="child-gift">10년 이내 자녀 증여금액</label>
+        <input type="checkbox" id="child_gift" name="child_gift" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="child_gift">10년 이내 자녀 증여금액</label>
         <div class="input-block">
-            <input type="text" name="child-gift_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <input type="text" id="child_gift_value" name="child_gift_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
         </div>
     </li>
     <li>
-        <input type="checkbox" id="other-gift" name="other-gift" class="toggle-input">
-        <label style="font-size: 16; font-family:Nanum Square;" for="other-gift">5년 이내 상속인외 증여금액(손자,손녀 등)</label>
+        <input type="checkbox" id="other_gift" name="other_gift" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="other_gift">5년 이내 상속인외 증여금액(손자,손녀 등)</label>
         <div class="input-block">
-            <input type="text" name="other-gift_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <input type="text" id="other_gift_value" name="other_gift_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
         </div>
     </li>
     <li>
-        <input type="checkbox" id="appraisal-fee" name="appraisal-fee" class="toggle-input">
-        <label style="font-size: 16; font-family:Nanum Square;" for="appraisal-fee">감정평가수수료</label>
+        <input type="checkbox" id="appraisal_fee" name="appraisal_fee" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="appraisal_fee">감정평가수수료</label>
         <div class="input-block">
-            <input type="text" name="appraisal-fee_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <input type="text" id="appraisal_fee_value" name="appraisal_fee_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
             <ul class="checkbox-caption">
                 <li>최대 한도액은 500만원입니다.</li>
             </ul>
         </div>
     </li>
     <li>
-        <input type="checkbox" id="pre-paid-tax" name="pre-paid-tax" class="toggle-input">
-        <label style="font-size: 16; font-family:Nanum Square;" for="pre-paid-tax">사전 증여 시 납부한 세액</label>
+        <input type="checkbox" id="pre_paid_tax" name="pre_paid_tax" class="toggle-input">
+        <label style="font-size: 16; font-family:Nanum Square;" for="pre_paid_tax">사전 증여 시 납부한 세액</label>
         <div class="input-block">
-            <input type="text" name="pre-paid-tax_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
+            <input type="text" id="pre_paid_tax_value" name="pre_paid_tax_value" class="input-block-value" oninput="formatNumber(this)" placeholder="금액 입력">원
         </div>
     </li>
 </ul>
 
 <div style="text-align: center; margin-top: 30px;">
-    <button type="button" onclick="getInput()" style="padding: 10px 20px; font-size: 18px; background-color: #73073450; color: white; border: none; cursor: pointer;">상속세 절세 보고서 보기</button>
+    <button class="fixedButton" type="button" onclick="getInput()" >상속세 절세 보고서 보기</button>
 </div>
 
 <p style="margin:0cm 0cm 10pt; text-align:justify">&nbsp;</p>
@@ -331,7 +331,7 @@ body {
     <div class="col-12 pt-5" style="margin-top: 80px">
         <div class="subTitle">1. 기본 전제사항 및 입력내용</div>
     </div>
-    <div class="pt-3">
+    <div style="padding-left: 20px;" class="pt-3">
         <table id="resultTable" class="result-table col-md-8">
             <thead >
             <tr class="table-head-hk">
@@ -354,9 +354,10 @@ body {
         <div style="padding-left: 20px;" class="description pt-3">
             <p>- 기본적으로 배우자가 생존해 있는 경우에 최소 10억원의 상속공제가 가능합니다. 다만, 사전증여가 존재하는 경우에는 10억이 안될 수가 있습니다</p>
             <p> - 배우자상속공제를 활용할 수 있습니다. 30억까지 가능하며, 실제 상속받은금액과 법정상속분을 한도로 하고 있습니다. 만일 배우자 상속액이 5억원 이하일 경우에는 5억원을 공제하게 됩니다.</p>
+            <p> - 기타상속공제 활용시의 차이를 보기위해 여기에서는 금융상속공제, 동거주택상속공제는 제외하였습니다.</p>
         </div>
         <div style="padding-left: 20px;" class="description pt-3">
-            <p> - 인적공제를 통한 상속세 계산내역<br>: 여기에서는 기본으로 10억원의 상속공제를 받는 경우와 배우자상속공제를 최대로 활용하는 경우를 비교하여 계산하였습니다. 배우자가 실제받는 상속금액이 법정한도 이하일 경우 최대로 공제받지 못하므로 배우자가 법정한도 이상의 금액을 실제로 상속받는 가정으로 시뮬레이션을 했습니다.</p>
+            <p> - 인적공제를 통한 상속세 계산내역<br>: 여기에서는 기본으로 10억원의 상속공제를 받는 경우와 배우자상속공제를 최대로 활용하는 경우를 비교하여 계산하였습니다. </p>
             <p>
                 <table class="result-table col-md-12">
                     <thead >
@@ -370,96 +371,86 @@ body {
                     <tbody>
                         <tr>
                             <td>(1) 총 상속재산가액</td>
-                            <td></td>
-                            <td></td>
+                            <td class = "amount-align-hk" id="totalValue0"></td>
+                            <td class = "amount-align-hk" id="totalValue1"></td>
                             <td>입력한 상속재산 총합</td>
                         </tr>
                         <tr>
                             <td>(2) 장례비용,채무 및 공과금</td>
-                            <td></td>
-                            <td></td>
-                            <td>장례비 최소500만원적용</td>
+                            <td class = "amount-align-hk" id="tax_free0"></td>
+                            <td class = "amount-align-hk" id="tax_free1"></td>
+                            <td>장례비최소500만원</td>
                         </tr>
                         <tr>
-                            <td>(3) 사전 증여재산</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>(4) 상속세 과세가액</td>
-                            <td></td>
-                            <td></td>
+                            <td>(3) 상속세 과세가액</td>
+                            <td class = "amount-align-hk" id="tax_price0"></td>
+                            <td class = "amount-align-hk" id="tax_price1"></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td>(5) 상속공제</td>
-                            <td></td>
-                            <td></td>
+                            <td>(4) 상속공제 소계</td>
+                            <td class = "amount-align-hk" >100,000,000</td>
+                            <td class = "amount-align-hk" id="tax_dedct"></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td> - 배우자공제</td>
+                            <td style="padding-left: 20px;"> - 배우자공제</td>
                             <td></td>
-                            <td></td>
+                            <td class = "amount-align-hk" id="spouse_dedct"></td>
                             <td>최소5억, 최대 30억</td>
                         </tr>
                         <tr>
-                            <td> - 자녀공제</td>
+                            <td style="padding-left: 20px;"> - 인적공제</td>
                             <td></td>
-                            <td></td>
-                            <td>자녀공제가 적을경우 인적공제로</td>
-                        </tr>
-                        <tr>
-                            <td> - 인적공제</td>
-                            <td></td>
-                            <td></td>
+                            <td class = "amount-align-hk" id="family_dedct"></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td>(6) 감정평가수수료</td>
-                            <td></td>
-                            <td></td>
+                            <td>(5) 감정평가수수료</td>
+                            <td class = "amount-align-hk" id="app_fee0"></td>
+                            <td class = "amount-align-hk" id="app_fee1"></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td>(7) 상속세 과세표준</td>
-                            <td></td>
-                            <td></td>
-                            <td>과세가액에서 공제및수수료등 제외</td>
+                            <td>(6) 상속세 과세표준</td>
+                            <td class = "amount-align-hk" id="tax_base0"></td>
+                            <td class = "amount-align-hk" id="tax_base1"></td>
+                            <td>(3) - (4) - (5)</td>
                         </tr>
                         <tr>
-                            <td>(8) 세율</td>
-                            <td></td>
-                            <td></td>
+                            <td>(7) 세율</td>
+                            <td class = "amount-align-hk" id="tax_rate0"></td>
+                            <td class = "amount-align-hk" id="tax_rate1"></td>
                             <td>누진세율공제</td>
                         </tr>
                         <tr>
-                            <td>(9) 누진공제액</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>(10) 산출세액</td>
-                            <td></td>
-                            <td></td>
+                            <td>(8) 누진공제액</td>
+                            <td class = "amount-align-hk" id="tax_acc_dedct0"></td>
+                            <td class = "amount-align-hk" id="tax_acc_dedct1"></td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td>(11) 산출공제</td>
+                            <td>(9) 산출세액</td>
+                            <td class = "amount-align-hk" id="cal_tax0"></td>
+                            <td class = "amount-align-hk" id="cal_tax1"></td>
                             <td></td>
-                            <td></td>
-                            <td>자진신고납부 시 3% 공제</td>
+                        </tr>
+                        <tr>
+                            <td>(10) 세액공제</td>
+                            <td class = "amount-align-hk" id="cal_tax_dedct0"></td>
+                            <td class = "amount-align-hk" id="cal_tax_dedct1"></td>
+                            <td>자진신고3%공제,사전증여세</td>
                         </tr>
                         <tr class="table-tail-hk">
-                            <td>(12) 자진납부 세액</td>
-                            <td></td>
-                            <td></td>
+                            <td>(11) 자진납부 세액</td>
+                            <td class = "amount-align-hk" id="pay_tax0"></td>
+                            <td class = "amount-align-hk" id="pay_tax1"></td>
                             <td>최종 납부할 세액</td>
                         </tr>
                     </tbody>
                 </table>
+            </p>
+            <p class="result-description pt-2"> 이를 기준으로 상속세가 <b id="pay_tax0_p"></b>원에서 <b id="pay_tax1_p"></b>원으로 <b>배우자공제활용</b>을 통해 <b id="pay_tax_margin0"></b>원이  절세됩니다.
             </p>
         </div>
     </div>
@@ -471,14 +462,84 @@ body {
         <div style="padding-left: 20px;" class="description pt-3">
             <p><strong> [ 금융상속공제 ]  </strong></p>
             <p> - 순금융재산은 금융재산(예적금, 주식, 증권, 보험금 등)에서 금융채무를 제한 금액이 공제됩니다.
-                <br>1) 순금융재산이 2천만원이하일 경우: 순금융재산 전액이 공제됩니다.
-                <br>2) 순금융재산이 2천만원을 초과하는 경우: 순금융재산 가액의 20% 혹은 2천만원 중 더 큰 금액을 공제합니다. 단, 2억원한도입니다.
+                <p  style="padding-left: 20px;">
+                1) 순금융재산이 2천만원이하일 경우: 순금융재산 전액이 공제됩니다.<br>
+                2) 순금융재산이 2천만원을 초과하는 경우: 순금융재산 가액의 20% 혹은 2천만원 중 더 큰 금액을 공제합니다. 단, 2억원한도입니다.
+                </p>
             </p>
-            <p>- 현재 입력하신 금융재산은 다음과 같습니다. 절세효과가 궁금하시면 가상의 순금융재산가액을 입력하여 시뮬레이션결과를 확인할 수 있습니다.
-                <br>입력하신 금융재산 가액 0000 원
-                <br>추가 순 금융재산 가액 0000원
+            <p>- (간편계산) 편의를 위해 입력하신 내용을 바탕으로한 추측한 금융재산은 다음과 같습니다.(금융자산 등 그외 상속재산을 금융재산으로, 채무및공과금을 금융채무로 간주하였습니다) 
+                <div style="padding-left: 20px;">
+                    <table class="result-table col-md-8">
+                        <thead >
+                        <tr class="table-head-hk">
+                            <th>구 분</th>
+                            <th>금 액</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>금융재산</td>
+                                <td class = "amount-align-hk" id="financial_value_p"></td>
+                            </tr>
+                            <tr>
+                                <td>금융채무</td>
+                                <td class = "amount-align-hk" id="debt_value_p"></td>
+                            </tr>
+                            <tr>
+                                <td>순금융재산</td>
+                                <td class = "amount-align-hk" id="net_value_p"></td>
+                            </tr>
+                            <tr>
+                                <td>금융공제액</td>
+                                <td class = "amount-align-hk" id="fin_dedct_p" ></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="result-description pt-2"> 이를 기준으로 상속세가 <b id="pay_tax_fin1"></b>원에서 <b id="pay_tax_fin2"></b>원으로 <b id="pay_tax_margin"></b>원 절세됩니다.
+                    </p>
+                </div>
             </p>
-            <p class="result-description">- 입력하신 금액을 기준으로 상속세가 0000원에서 0000원으로 0000원 절세됩니다.
+            <p>- (정확한계산) 상속재산 중 금융에 해당되지 않는 금액을 제하고 해당금액을 아래에 입력하여 더욱 정확한 결과를 확인할 수 있습니다. 
+                <p  style="padding-left: 20px;">
+                금융재산 가액: <input type="text" id="financial_exact" name="financial_exact" oninput="formatNumber(this)" onchange="CalFinDedct()">원<br>
+                금융채무 가액: <input type="text" id="fin_debt_exact" name="fin_debt_exact" oninput="formatNumber(this)" onchange="CalFinDedct()">원
+                </p>
+                <p  style="padding-left: 20px;">
+                    만일 상속재산 일부를 금융재산으로 변경하시는 경우가 궁금하시면, 아래에 금액을  입력하여 시뮬레이션결과를 확인할 수 있습니다.
+                </p>
+                <p  style="padding-left: 20px;">
+                    추가된 금융재산 가액: <input type="text" id="financial_value2" name="financial_value2" oninput="formatNumber(this)" onchange="CalFinDedct()">원
+                </p>
+                <div style="padding-left: 20px;">
+                    <table class="result-table col-md-8">
+                        <thead >
+                        <tr class="table-head-hk">
+                            <th>구 분</th>
+                            <th>금 액</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>금융재산</td>
+                                <td class = "amount-align-hk" id="financial_value_p2"></td>
+                            </tr>
+                            <tr>
+                                <td>금융채무</td>
+                                <td class = "amount-align-hk" id="debt_value_p2"></td>
+                            </tr>
+                            <tr>
+                                <td>순금융재산</td>
+                                <td class = "amount-align-hk" id="net_value_p2"></td>
+                            </tr>
+                            <tr>
+                                <td>금융공제액</td>
+                                <td class = "amount-align-hk" id="fin_dedct_p2" ></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="padding-left: 20px;" class="result-description pt-2"> 이를 기준으로 상속세가   <b id="pay_tax_b"></b>원에서 <b id="pay_tax_fin_exact"></b>원으로 <b>금융상속공제활용</b>을 통해 <b id="pay_tax_exact_margin"></b>원이 추가로 절세됩니다.
+                </p>
             </p>
         </div>
         <div style="padding-left: 20px;" class="description pt-3">
@@ -487,11 +548,20 @@ body {
                 <br>1) 사망일 전 부터 10년이상 계속 같이 하나의 주택에서 거주
                 <br>2) 동거한 자녀가 직접 상속받을 것
             </p>
-            <p>- 주택가액에서 주택담보 채무액을 제하고 입력해 주세요
-                <br>동거주택가액 0000 원
+            <p>- (간편계산)입력하신 주택 기준 공제액과 절세액
+                <p  style="padding-left: 20px;">
+                    동거주택가액: <b id="house_value_p"></b>원 (주택담보 채무액은 없는 것으로 간주)
+                    </p>
+                    <p style="padding-left: 20px;" class="result-description"> 이를 기준으로 상속세가   <b id="pay_tax_f_basic"></b>원에서 <b id="pay_tax_h_basic"></b>원으로 <b>동거주택상속공제활용</b>을 통해 <b id="pay_tax_h_margin"></b>원이 추가로 절세됩니다.
+                    </p>
             </p>
-            <p class="result-description">- 입력하신 금액을 기준으로 금융상속공제까지 포함하여 상속세가 10000원에서 00000원으로 10000원이 절세 됩니다.
-            </p>
+            <p>- (정확한계산)주택담보 채무액이 포함되어 있다면 이를 입력해 주세요
+                <p  style="padding-left: 20px;">
+                    동거주택가액: <b id="house_value_p2"></b>원 (주택담보 채무액: <input type="text" id="house_debt" name="net_house_value" oninput="formatNumber(this)" onchange="CalAlongDedct()">원)
+                    </p>
+                    <p style="padding-left: 20px;" class="result-description"> 이를 기준으로 상속세가   <b id="pay_tax_f"></b>원에서 <b id="pay_tax_h_exact"></b>원으로 <b>동거주택상속공제활용</b>을 통해 <b id="pay_tax_h_exact_margin"></b>원이 추가로 절세됩니다.
+                    </p>
+                </p>
         </div>
     </div>
     <!--취득세-->
@@ -882,7 +952,7 @@ body {
                             <td></td>
                         </tr>
                         <tr>
-                            <td>(10) 세율/td>
+                            <td>(10) 세율</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -894,7 +964,7 @@ body {
                             <td></td>
                         </tr>
                         <tr>
-                            <td>(12) 양도소득세/td>
+                            <td>(12) 양도소득세</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -939,12 +1009,9 @@ body {
 
     <p style="margin:0cm 0cm 10pt; text-align:justify">&nbsp;</p>
 
-    <div style="text-align: center; margin-top: 30px;">
-        <button type="button" onclick="goBack()" style="padding: 10px 20px; font-size: 18px;    background-color: #730734; color: white; border: none; cursor: pointer;">입력 페이지로     돌아가기</button>
-    </div>
-
     <p style="margin:0cm 0cm 10pt; text-align:justify">&nbsp;</p>
 
+    <button class="fixedButton" type="button" onclick="goBack()">입력페이지로 돌아가기</button>
     </div> <!-- end of resultPage -->
 
             </div> <!-- py-5 클래스 추가 end-->
@@ -957,7 +1024,6 @@ body {
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js" integrity="sha384-gdQErvCNWvHQZj6XZM0dNsAoY4v+j5P1XDpNkcM3HJG1Yx04ecqIHk7+4VBOCHOG" crossorigin="anonymous"></script>
-    <script src="dashboard.js"></script>
     <script>
         function formatNumber(input) {
             // Remove commas and non-numeric characters
@@ -1016,16 +1082,16 @@ body {
                 'financial_value': '금융자산 등 그외 상속재산 가액',
                 'debt': '채무 및 공과금',
                 'debt_value': '채무 및 공과금 가액',
-                'spouse-gift': '10년 이내 배우자 증여금액',
-                'spouse-gift_value': '10년 이내 배우자 증여금액',
-                'child-gift': '10년 이내 자녀 증여금액',
-                'child-gift_value': '10년 이내 자녀 증여금액',
-                'other-gift': '5년 이내 상속인외 증여금액(손자,손녀 등)',
-                'other-gift_value': '5년 이내 상속인외 증여금액(손자,손녀 등)',
-                'appraisal-fee': '감정평가수수료',
-                'appraisal-fee_value': '감정평가수수료',
-                'pre-paid-tax': '사전 증여 시 납부한 세액',
-                'pre-paid-tax_value': '사전 증여 시 납부한 세액'
+                'spouse_gift': '10년 이내 배우자 증여금액',
+                'spouse_gift_value': '10년 이내 배우자 증여금액',
+                'child_gift': '10년 이내 자녀 증여금액',
+                'child_gift_value': '10년 이내 자녀 증여금액',
+                'other_gift': '5년 이내 상속인외 증여금액(손자,손녀 등)',
+                'other_gift_value': '5년 이내 상속인외 증여금액(손자,손녀 등)',
+                'appraisal_fee': '감정평가수수료',
+                'appraisal_fee_value': '감정평가수수료',
+                'pre_paid_tax': '사전 증여 시 납부한 세액',
+                'pre_paid_tax_value': '사전 증여 시 납부한 세액'
 
             };
 
@@ -1071,6 +1137,9 @@ body {
             // 입력 페이지 숨기고 결과 페이지 표시
             document.getElementById('inputPage').style.display = 'none';
             document.getElementById('resultPage').style.display = 'block';
+
+            //세금계산 함수 call
+            calculate_inherit();
         }
 
         function goBack() {
@@ -1079,105 +1148,260 @@ body {
             document.getElementById('inputPage').style.display = 'block';
         }
 
-    function calculate() {
-        const is_spouse = parseFloat(document.getElementById('is_spouse').value.replace(/,/g, '')) || 0; //배우자존재여부 존재=1, 없음=0
-        const siblingNum = parseFloat(document.getElementById('siblingNum').value.replace(/,/g, '')) || 0; //자녀숫자
-        const aptMarketValue = parseFloat(document.getElementById('aptMarketValue').value.replace(/,/g, '')) || 0; //아파트 매매가액 시세
-        const finValue = parseFloat(document.getElementById('finValue').value.replace(/,/g, '')) || 0; //금융상속분
-        const rentValue = parseFloat(document.getElementById('rentValue').value.replace(/,/g, '')) || 0; //아파트 전세보증금-부채
-        const fnrl_fee = parseFloat(document.getElementById('fnrl_fee').value.replace(/,/g, '')) || 0; //장례비용
+        
+    //----------------------------------------------------------------------
+    //
+    //     2. 상속세 절세
+    //
+    //     인적상속공제의 활용 & 기타상속공제의 활용
+    //
+    //======================================================================
+    function calculate_inherit() {
+        //---- 기본입력 ----
+        var spouse = parseFloat(document.getElementById('spouse').value.replace(/,/g, '')) || 0; //배우자존재여부 존재=1, 없음=0
+        var children = parseFloat(document.getElementById('children').value.replace(/,/g, '')) || 0; //자녀숫자
+        var house_value = parseFloat(document.getElementById('house_value').value.replace(/,/g, '')) || 0; //아파트 매매가액 시세
+        var funeral_facility = parseFloat(document.getElementById('funeral_facility').value.replace(/,/g, '')) || 0; //봉안시설비용
+        var funeral_cost = parseFloat(document.getElementById('funeral_cost').value.replace(/,/g, '')) || 0; //장례비용
 
-        //---1. 총 상속액
-        const totalValue = aptMarketValue + finValue;
+        //---- 추가입력 ----
+        var building_value = parseFloat(document.getElementById('building_value')?.value.replace(/,/g, '')) || 0;
+        var farmland_value = parseFloat(document.getElementById('farmland_value')?.value.replace(/,/g, '')) || 0; 
+        var forest_value = parseFloat(document.getElementById('forest_value')?.value.replace(/,/g, '')) || 0; 
+        var financial_value = parseFloat(document.getElementById('financial_value')?.value.replace(/,/g, '')) || 0; 
+        var debt_value = parseFloat(document.getElementById('debt_value')?.value.replace(/,/g, '')) || 0; 
+        var spouse_gift_value = parseFloat(document.getElementById('spouse_gift_value')?.value.replace(/,/g, '')) || 0; 
+        var child_gift_value = parseFloat(document.getElementById('child_gift_value')?.value.replace(/,/g, '')) || 0; 
+        var other_gift_value = parseFloat(document.getElementById('other_gift_value')?.value.replace(/,/g, '')) || 0; 
+        var appraisal_fee_value = parseFloat(document.getElementById('appraisal_fee_value')?.value.replace(/,/g, '')) || 0; 
+        var pre_paid_tax_value = parseFloat(document.getElementById('pre_paid_tax_value')?.value.replace(/,/g, '')) || 0; 
 
-        //장례비용 + 봉안지(추가500만원까지가능-코딩제외)
-        if(!fnrl_fee){fnrl_fee = 5000000;}
-        if(fnrl_fee < 5000000){ fnrl_fee = 5000000 }
-        if(fnrl_fee > 10000000){ fnrl_fee = 10000000 }
+        //---1. 총 상속재산가액
+        var totalValue = house_value + building_value + farmland_value + forest_value + financial_value + spouse_gift_value + child_gift_value + other_gift_value;
 
-        //---2. 상속가액
-        var tax_price = totalValue - fnrl_fee - rentValue;
-        var dct_tax_price = totalValue - rentValue; //공제용 상속가액은 장례비용제외
+        //---2. 장례비용 + 봉안지(추가500만원까지가능).채무,공과
+        var funeral_all;
 
-        //after 상속공제액 계산 totalDedct = overallDedct + spouseDedct + finDedct + alongDedct
-        //before 상속공제액 계산 totalDedct_b = overallDeduct + spouseDedct_b
-        var overallDedct = 0; //인적공제 및 일괄공제
-        if(is_spouse > 0 && siblingNum == 0 ) {overallDedct = 200000000;} //여기는 해당없지만 일단 입력. 배우자 단독공제
-        if(siblingNum > 0) {overallDedct = 500000000;} //자녀가 있는경우 일괄공제 5억 적용
+        if(!funeral_cost){funeral_cost = 5000000;}
+        if(funeral_cost < 5000000){ funeral_cost = 5000000 }
+        if(funeral_cost > 10000000){ funeral_cost = 10000000 }
 
+        funeral_all = funeral_cost + Math.max(funeral_facility,5000000);
 
-        var spouseShare = 0, spouseDedct = 0, spouseDedct_b = 0; //배우자없는경우 배우자공제=0;
-        if (is_spouse == 1) { //배우자 존재할 경우
-            spouseDedct_b = 500000000; //법적상속분, 실제상속분 고려하지 않음
+        var tax_free = funeral_all + debt_value;
 
-            spouseShare = 1.5/(1.5 + siblingNum);
+        //---3. 상속세 과세가액
+        var tax_price = totalValue - tax_free;
+        var dct_tax_price = totalValue - debt_value; //공제용 상속가액은 장례비용제외
+
+        //---4. 상속공제 소계: 10억 vs 배우자공제이용(금융공제,동거주택공제는 별도계산)
+        var tax_dedct = 0, spouse_dedct =0, family_dedct=0; //인적공제 및 일괄공제
+
+        if(spouse > 0 && children == 0 ) {tax_dedct = 200000000;} //여기는 해당없지만 일단 입력. 배우자 단독공제
+        if(children > 0) {family_dedct = 500000000;} //자녀가 있는경우 일괄공제 5억 적용
+
+        var spouseShare = 0; 
+        if (spouse == 1) { //배우자 존재할 경우.여기서는 항상 존재하는 걸로..
+            spouseShare = 1.5/(1.5 + children);
             let s1 = dct_tax_price; //배우자가 최대 상속받았다고 가정
             let s2 = Math.floor(dct_tax_price*spouseShare); //배우자의 법정상속분
             let s3 = 3000000000; //배우자 최대상속액 30억
-            spouseDedct = Math.min(s1,s2,s3);
-            //5억이하이면 5억으로
-            if(spouseDedct < 500000000) {spouseDedct = 500000000;}
-        }
+            spouse_dedct = Math.min(s1,s2,s3);
 
-        var finDedct = finValue; //금융공제.은행빚이있는경우차감
-        if(finValue > 1000000000) {finDedct = 200000000;}
-        else if(finValue > 100000000) {finDedct = finValue*0.2;}
-        else if(finValue > 20000000) {finDedct = 20000000;}
+            //5억이하이면 5억으로
+            if(spouse_dedct < 500000000) {spouse_dedct = 500000000;}
+        }
+        tax_dedct = spouse_dedct + family_dedct;
+
+        var net_fin = Math.max(financial_value - debt_value,0); //금융공제.은행빚이있는경우차감
+        var finDedct = 0;
+        if(net_fin <= 20000000) { finDedct = net_fin}
+        else {finDedct = Math.min(200000000, Math.max(20000000, net_fin*0.2));}
 
         var alongDedct = 0; //동거주택상속공제
-        alongDedct = Math.min(aptMarketValue, 600000000);
+        alongDedct = Math.min(house_value, 600000000);
 
-
-        var totalDedct = overallDedct + spouseDedct + finDedct + alongDedct;
-        var totalDedct_b = overallDedct + spouseDedct_b;
+        var totalDedct0 = 1000000000 + appraisal_fee_value; //재우자,자녀 기본 일괄공제 10억
+        var totalDedct1 = family_dedct + spouse_dedct + appraisal_fee_value; //인적공제만
+        var totalDedct2 = family_dedct + spouse_dedct + finDedct + appraisal_fee_value; //인적공제+금융공제
+        var totalDedct3 = family_dedct + spouse_dedct + finDedct + alongDedct + appraisal_fee_value; //인적공제+금융공제+동거주택공제
 
         //--3. 과세표준
-        var taxBase = Math.max(0, tax_price - totalDedct);
-        var taxBase_b = Math.max(0, tax_price - totalDedct_b);
+        var tax_base0 = Math.max(0, tax_price - totalDedct0);
+        var tax_base1 = Math.max(0, tax_price - totalDedct1);
+        var tax_base2 = Math.max(0, tax_price - totalDedct2);
+        var tax_base3 = Math.max(0, tax_price - totalDedct3);
 
-        //세율
-        var r =0,acc=0;
-        if(taxBase <= 100000000){r = 0.1;acc = 0;} else
-        if(taxBase <= 500000000){r = 0.2;acc = 10000000;} else
-        if(taxBase <= 1000000000){r = 0.3;acc = 60000000;} else
-        if(taxBase <= 3000000000){r = 0.4;acc = 160000000;} else
-        if(taxBase > 3000000000){r = 0.5;acc = 460000000;}
-        
-        //세율 - 기본공제시
-        var r_b =0,acc_b=0;
-        if(taxBase_b <= 100000000){r_b = 0.1;acc_b = 0;} else
-        if(taxBase_b <= 500000000){r_b = 0.2;acc_b = 10000000;} else
-        if(taxBase_b <= 1000000000){r_b = 0.3;acc_b = 60000000;} else
-        if(taxBase_b <= 3000000000){r_b = 0.4;acc_b = 160000000;} else
-        if(taxBase_b > 3000000000){r_b = 0.5;acc_b = 460000000;}
-//alert(taxBase_b);
-//alert(r_b);
-//alert(acc_b);
- 
         //---4. 산출세액
-        var calTax = taxBase*r - acc;
-        var calTax_b = taxBase_b*r_b - acc_b;
-//alert(calTax_b);
+        const [r0, acc0] = CallTariff(tax_base0);
+        const [r1, acc1] = CallTariff(tax_base1);
+        const [r2, acc2] = CallTariff(tax_base2);
+        const [r3, acc3] = CallTariff(tax_base3);
+
+        var cal_tax0 = Math.floor(tax_base0*r0 - acc0);
+        var cal_tax1 = Math.floor(tax_base1*r1 - acc1);
+        var cal_tax2 = Math.floor(tax_base2*r2 - acc2);
+        var cal_tax3 = Math.floor(tax_base3*r3 - acc3);
+
+        //-- 세액공제
+        var tax_dedct0 = pre_paid_tax_value + Math.floor((cal_tax0 - pre_paid_tax_value)*0.03);
+        var tax_dedct1 = pre_paid_tax_value + Math.floor((cal_tax1 - pre_paid_tax_value)*0.03);
+        var tax_dedct2 = pre_paid_tax_value + Math.floor((cal_tax2 - pre_paid_tax_value)*0.03);
+        var tax_dedct3 = pre_paid_tax_value + Math.floor((cal_tax3 - pre_paid_tax_value)*0.03);
 
         //--5. 결정세액
-        var inheritTax = Math.floor(calTax - calTax*0.03); //사전납입 공제율3%
-        var inheritTax_b = Math.floor(calTax_b - calTax_b*0.03); //사전납입 공제율3%
-        var taxSave = Math.max(0, inheritTax_b - inheritTax);
-//        alert(spouseDedct);        
-//        alert(inheritTax_b);
-//        alert(inheritTax);
-//        alert(taxSave);
+        var pay_tax0 = Math.floor((cal_tax0 - tax_dedct0)/10)*10; //사전납입 공제율3%
+        var pay_tax1 = Math.floor((cal_tax1 - tax_dedct1)/10)*10; //사전납입 공제율3%
+        var pay_tax2 = Math.floor((cal_tax2 - tax_dedct2)/10)*10; //사전납입 공제율3%
+        var pay_tax3 = Math.floor((cal_tax3 - tax_dedct3)/10)*10; //사전납입 공제율3%
         
         //계산결과 출력
-        document.getElementById('inheritTax_b').textContent = inheritTax_b.toLocaleString();   //상속세
-        document.getElementById('inheritTax').textContent = inheritTax.toLocaleString();   //상속세
-        document.getElementById('spouseDedct').textContent = spouseDedct.toLocaleString();   //배우자상속공제액
-        document.getElementById('finDedct').textContent = finDedct.toLocaleString();   //금융공제액
-        document.getElementById('alongDedct').textContent = alongDedct.toLocaleString();   //금융공제액
-        document.getElementById('taxSave').textContent = taxSave.toLocaleString();   //절세액
+        document.getElementById('totalValue0').textContent = totalValue.toLocaleString();   //(1) 총 상속재산가액
+        document.getElementById('totalValue1').textContent = totalValue.toLocaleString();   //(1) 총 상속재산가액
+        document.getElementById('tax_free0').textContent = tax_free.toLocaleString();   //(2) 장례비용,채무 및 공과금
+        document.getElementById('tax_free1').textContent = tax_free.toLocaleString();   //(2) 장례비용,채무 및 공과금
+        document.getElementById('tax_price0').textContent = tax_price.toLocaleString();   //(3) 상속세 과세가액
+        document.getElementById('tax_price1').textContent = tax_price.toLocaleString();   //(3) 상속세 과세가액
+        document.getElementById('tax_dedct').textContent = (spouse_dedct + 
+        family_dedct).toLocaleString();   //(4) 상속공제 소계
+        document.getElementById('spouse_dedct').textContent = spouse_dedct.toLocaleString();   //배우자공제
+        document.getElementById('family_dedct').textContent = family_dedct.toLocaleString();   //인적공제
+        document.getElementById('app_fee0').textContent = appraisal_fee_value.toLocaleString();   //(5)감정평가수수료
+        document.getElementById('app_fee1').textContent = appraisal_fee_value.toLocaleString();   //(5)감정평가수수료
+        document.getElementById('tax_base0').textContent = tax_base0.toLocaleString();   //(6)상속세과세표준
+        document.getElementById('tax_base1').textContent = tax_base1.toLocaleString();   //(6)상속세과세표준
+        document.getElementById('tax_rate0').textContent = r0.toLocaleString();   //(7)세율
+        document.getElementById('tax_rate1').textContent = r1.toLocaleString();   //(7)세율
+        document.getElementById('tax_acc_dedct0').textContent = acc0.toLocaleString();   //(8)누진공제액
+        document.getElementById('tax_acc_dedct1').textContent = acc1.toLocaleString();   //(8)누진공제액
+        document.getElementById('cal_tax0').textContent = cal_tax0.toLocaleString();   //(9)산출세액
+        document.getElementById('cal_tax1').textContent = cal_tax1.toLocaleString();   //(9)산출세액
+        document.getElementById('cal_tax_dedct0').textContent = Math.floor(cal_tax0*0.03).toLocaleString();   //(10)세액공제
+        document.getElementById('cal_tax_dedct1').textContent = Math.floor(cal_tax1*0.03).toLocaleString();   //(10)세액공제
+        document.getElementById('pay_tax0').textContent = pay_tax0.toLocaleString();   //(11)자진납부세액
+        document.getElementById('pay_tax1').textContent = pay_tax1.toLocaleString();   //(11)자진납부세액
+
+        document.getElementById('pay_tax0_p').textContent = pay_tax0.toLocaleString(); 
+        document.getElementById('pay_tax1_p').textContent = pay_tax1.toLocaleString(); 
+        document.getElementById('pay_tax_margin0').textContent = (pay_tax0-pay_tax1).toLocaleString(); 
+
+        //기타상속공제활용 출력
+        document.getElementById('financial_value_p').textContent = financial_value.toLocaleString();   
+        document.getElementById('debt_value_p').textContent = debt_value.toLocaleString();   
+        document.getElementById('net_value_p').textContent = Math.max(financial_value - debt_value,0).toLocaleString();   
+        document.getElementById('fin_dedct_p').textContent = finDedct.toLocaleString();   
+        document.getElementById('pay_tax_fin1').textContent = pay_tax1.toLocaleString();   
+        document.getElementById('pay_tax_fin2').textContent = pay_tax2.toLocaleString();   
+        document.getElementById('pay_tax_margin').textContent = (pay_tax1 - pay_tax2).toLocaleString();
+
+        //동거주택상속공제
+        document.getElementById('house_value_p').textContent = house_value.toLocaleString();   
+        document.getElementById('house_value_p2').textContent = house_value.toLocaleString();   
+        document.getElementById('pay_tax_f_basic').textContent = pay_tax2.toLocaleString();   
+        document.getElementById('pay_tax_h_basic').textContent = pay_tax3.toLocaleString();   
+        document.getElementById('pay_tax_h_margin').textContent = (pay_tax2 - pay_tax3).toLocaleString();   
+
     }
 
-    </script>
+    function CallTariff(tax_base) {
+        var r =0,acc=0;
+        if(tax_base <= 100000000){r = 0.1;acc = 0;} else
+        if(tax_base <= 500000000){r = 0.2;acc = 10000000;} else
+        if(tax_base <= 1000000000){r = 0.3;acc = 60000000;} else
+        if(tax_base <= 3000000000){r = 0.4;acc = 160000000;} else
+        if(tax_base > 3000000000){r = 0.5;acc = 460000000;}
+
+        return [r,acc];
+    }
+
+    //-------------------------------
+    // (정확한계산용) 금융상속공제 추가적용(인적공제포함)
+    //-------------------------------
+    function CalFinDedct(){
+        var financial_value1 = parseFloat(document.getElementById('financial_exact')?.value.replace(/,/g, '')) || 0;
+        var financial_value2 = parseFloat(document.getElementById('financial_value2')?.value.replace(/,/g, '')) || 0;
+        var debt_value = parseFloat(document.getElementById('fin_debt_exact')?.value.replace(/,/g, '')) || 0;
+        var tax_dedct = parseFloat(document.getElementById('tax_dedct')?.textContent.replace(/,/g, '')) || 0; //배우자공제+인적공제
+        var app_fee = parseFloat(document.getElementById('app_fee1')?.textContent.replace(/,/g, '')) || 0; //감정평가비용
+        var tax_price = parseFloat(document.getElementById('tax_price1')?.textContent.replace(/,/g, '')) || 0; //(3)상속세 상속가액
+        var pre_paid_tax_value = parseFloat(document.getElementById('pre_paid_tax_value')?.value.replace(/,/g, '')) || 0;  //사전납부증여세
+        var pay_tax1 = parseFloat(document.getElementById('pay_tax1')?.textContent.replace(/,/g, '')) || 0; //(11)일괄공제 포함 이전납부세액
+
+        var net_fin = Math.max(financial_value1 + financial_value2 - debt_value,0); //금융공제.은행빚이있는경우차감
+
+        var finDedct = 0;
+        if(net_fin <= 20000000) { finDedct = net_fin}
+        else {finDedct = Math.min(200000000, Math.max(20000000, net_fin*0.2));}
+
+        var totalDedct = tax_dedct + finDedct + app_fee; //인적공제+금융공제+감정평가비용
+
+
+        //--3. 과세표준
+        var tax_base = Math.max(0, tax_price - totalDedct);
+
+        //---4. 산출세액
+        const [r, acc] = CallTariff(tax_base);
+
+        var cal_tax = Math.floor(tax_base*r - acc);
+
+        //-- 세액공제 - 사전납입3%+사전증여세납입
+        var tax_dedct = pre_paid_tax_value + Math.floor((cal_tax - pre_paid_tax_value)*0.03);
+
+        //--5. 결정세액
+        var pay_tax = Math.floor((cal_tax - tax_dedct)/10)*10; 
+        
+        //계산결과 출력
+        document.getElementById('financial_value_p2').textContent = (financial_value1 + financial_value2).toLocaleString();   
+        document.getElementById('debt_value_p2').textContent = debt_value.toLocaleString();   
+        document.getElementById('net_value_p2').textContent = net_fin.toLocaleString();   
+        document.getElementById('fin_dedct_p2').textContent = finDedct.toLocaleString();   
+
+        document.getElementById('pay_tax_b').textContent = pay_tax1.toLocaleString();   
+        document.getElementById('pay_tax_fin_exact').textContent = pay_tax.toLocaleString();   
+        document.getElementById('pay_tax_exact_margin').textContent = (pay_tax1 - pay_tax).toLocaleString();   
+    }
+
+    //-------------------------------
+    // (정확한계산용) 동거주택상속공제 적용(인적공제,금융공제포함)
+    //-------------------------------
+    function CalAlongDedct(){
+        var house_value = parseFloat(document.getElementById('house_value').value.replace(/,/g, '')) || 0; //아파트 매매가액 시세
+        var debt_value = parseFloat(document.getElementById('house_debt_exact')?.value.replace(/,/g, '')) || 0; //주택담보채무액
+        var tax_dedct = parseFloat(document.getElementById('tax_dedct')?.textContent.replace(/,/g, '')) || 0; //배우자공제+인적공제
+        var fin_dedct = parseFloat(document.getElementById('fin_dedct_p2')?.textContent.replace(/,/g, '')) || 0; //금융상속공제
+        var app_fee = parseFloat(document.getElementById('app_fee1')?.textContent.replace(/,/g, '')) || 0; //감정평가비용
+        var tax_price = parseFloat(document.getElementById('tax_price1')?.textContent.replace(/,/g, '')) || 0; //(3)상속세 상속가액
+        var pre_paid_tax_value = parseFloat(document.getElementById('pre_paid_tax_value')?.value.replace(/,/g, '')) || 0;  //사전납부증여세
+        var pay_tax1 = parseFloat(document.getElementById('pay_tax_fin_exact')?.textContent.replace(/,/g, '')) || 0; //금융공제까지포함된 이전 상속세
+
+        var alongDedct = 0; //동거주택상속공제
+        alongDedct = Math.min(house_value, 600000000);
+
+        var totalDedct = tax_dedct + fin_dedct + alongDedct + app_fee; //인적공제+금융공제+감정평가비용
+
+
+        //--3. 과세표준
+        var tax_base = Math.max(0, tax_price - totalDedct);
+
+        //---4. 산출세액
+        const [r, acc] = CallTariff(tax_base);
+
+        var cal_tax = Math.floor(tax_base*r - acc);
+
+        //-- 세액공제 - 사전납입3%+사전증여세납입
+        var tax_dedct = pre_paid_tax_value + Math.floor((cal_tax - pre_paid_tax_value)*0.03);
+
+        //--5. 결정세액
+        var pay_tax = Math.floor((cal_tax - tax_dedct)/10)*10; 
+        
+        //계산결과 출력
+        document.getElementById('pay_tax_f').textContent = pay_tax1.toLocaleString();   
+        document.getElementById('pay_tax_h_exact').textContent = pay_tax.toLocaleString();   
+        document.getElementById('pay_tax_h_exact_margin').textContent = (pay_tax1 - pay_tax).toLocaleString();   
+
+    }
+
+</script>
 
 </body>
 </html>
