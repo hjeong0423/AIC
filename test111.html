@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조건부 요소 표시 예제</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input {
+            width: 100px;
+            padding: 5px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .message {
+            color: red;
+            margin-bottom: 10px;
+        }
+        .sum {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .hidden {
+            display: none;
+        }
+        .warning {
+            color: orange;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>조건부 요소 표시 예제</h2>
+        <div>
+            <input type="number" id="input1" oninput="limitInput(this, 'message1')" onchange="checkInputOnChange(this, 'message1')" min="0" max="10">
+            <span id="message1" class="message"></span>
+        </div>
+        <div>
+            <input type="number" id="input2" oninput="limitInput(this, 'message2')" onchange="checkInputOnChange(this, 'message2')" min="0" max="10">
+            <span id="message2" class="message"></span>
+        </div>
+        <div class="sum" id="sum"></div>
+        <p id="warningMessage" class="warning hidden">주의: 합계가 15를 초과했습니다!</p>
+    </div>
+
+    <script>
+        function limitInput(input, messageId) {
+            let value = input.value;
+            let message = document.getElementById(messageId);
+            
+            if (value === "") {
+                message.textContent = "";
+            } else {
+                let numValue = parseFloat(value);
+                if (isNaN(numValue)) {
+                    message.textContent = "유효한 숫자를 입력해주세요.";
+                } else if (numValue > 10) {
+                    message.textContent = "입력값이 10을 초과하여 10으로 재설정됩니다.";
+                } else if (numValue < 0) {
+                    message.textContent = "음수는 입력할 수 없습니다. 0으로 재설정됩니다.";
+                } else {
+                    message.textContent = "";
+                }
+            }
+
+            updateSum();
+        }
+
+        function checkInputOnChange(input, messageId) {
+            setTimeout(() => {
+                let value = parseFloat(input.value);
+                if (isNaN(value)) {
+                    input.value = "";
+                } else if (value > 10) {
+                    input.value = 10;
+                } else if (value < 0) {
+                    input.value = 0;
+                }
+                limitInput(input, messageId);
+            }, 0);
+        }
+
+        function updateSum() {
+            let input1 = parseFloat(document.getElementById('input1').value) || 0;
+            let input2 = parseFloat(document.getElementById('input2').value) || 0;
+            let sum = input1 + input2;
+            document.getElementById('sum').textContent = `두 수의 합: ${sum}`;
+            
+            let warningMessage = document.getElementById('warningMessage');
+            if (sum > 15) {
+                warningMessage.classList.remove('hidden');
+            } else {
+                warningMessage.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
