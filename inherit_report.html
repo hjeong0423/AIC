@@ -159,7 +159,7 @@ body {
         </div>
         <ul class="menu_list">
             <li><a href="inherit_pre.html">상속세 프리</a></li>
-            <li><a href="inherit_report.html">상속세 보고서</a></li>
+            <li><a href="inherit_report.html">상속세 프리미어</a></li>
             <li><a href="PostingCalc.html">포스팅 + 계산기</a></li>
           </ul>
         <a href="#" class="toggle_bar"><i class="fa-solid fa-bars"></i></a>
@@ -178,10 +178,12 @@ body {
 
   <form id="inheritanceForm">
 
-    <h1>상속세 셀프 절세 계산기 I</h1>
+    <h1>상속세 프리미어 보고서 들어가기</h1>
 
-  <p style="margin:0cm 0cm 10pt; text-align:justify">&nbsp;</p>
-  
+    <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:14px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%; font-weight: bold;">해당 보고서에는 '상속세 프리 보고서'에서 제공되는 상속세 및 상속세 절세방법 외에, 상속 이후에 발생되는 부동산 취득관련 세금, 보유관련 세금 그리고 상속재산을 처분하는 경우 발생되는 각종 세액을 계산해 드리며 동시에 절세할 수 있는 방법도 제공해 드립니다. 본인의 상황에 맞추어 혹은 추정되는 내용으로 입력값을 수정하시거나 추가내용을 자유롭게 입력하시면 여러 상황에 대한 의사결정을 도와드리겠습니다.</span></span></span></span></p>
+ 
+    <p style="margin:0cm 0cm 10pt; text-align:justify">&nbsp;</p>
+
   <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%">부모님 중 한 분이 먼저 돌아가신 경우를 먼저 알아보도록 하겠습니다. 배우자가 생존<input type="text" id="spouse" name="spouse" value="1" style="display:none;">해 있으며, 상속인이 되는 자녀의 수는 <input type="text" id="children" name="children" oninput="formatNumber(this)" value="2">명이며, 주택은 1채만을 소유하고 있고&nbsp;사망시 거래가액은 <input type="text" id="house_value" name="house_value" oninput="formatNumber(this)" value="2,000,000,000" >원 입니다.</span></span></span></span></p>
   
   <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%">봉안시설 등에 소요된 금액은 <input type="text" id="funeral_facility" name="funeral_facility" oninput="formatNumber(this)" value="5,000,000">원이며, 이를 제외한 총 장례비용은 <input type="text" id="funeral_cost" name="funeral_cost" oninput="formatNumber(this)" value="5,000,000">원 입니다.</span></span></span></span></p>
@@ -190,7 +192,7 @@ body {
   
   <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify">&nbsp;</p>
   
-  <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%; font-weight: bold;">기타 상속재산이 있는 경우에는 아래 해당항목을 클릭하여 입력하여 주시면 됩니다.</span></span></span></span></p>
+  <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%; font-weight: bold;">기타 상속재산이 있는 경우에는 아래 해당항목을 클릭하여 금액을 입력해주시면 됩니다.</span></span></span></span></p>
   
   <p style="margin-bottom:.0001pt; margin:0cm 0cm 10pt; text-align:justify"><span style="font-size:16px;"><span style="line-height:150%"><span style="font-family:Nanum Square;"><span style="line-height:150%; font-weight: bold;">* 추가자산, 채무 및 비용의 입력</span></span></span></span></p>
   
@@ -567,8 +569,6 @@ body {
                 </p>
         </div>
     </div>
-
-
     <div class="report-container col-12 pt-5">
         <div>◈ 상속세 절세 결과 요약테이블</div>
         <div style="padding-left: 20px;" class="description pt-3">
@@ -614,10 +614,6 @@ body {
             </table>
         </div>
     </div> 
-
-
-
-
     <!--취득세-->
     <div class="col-12 pt-5" style="margin-top: 80px">
         <div class="subTitle">3. 상속으로 인한 취득세의 절세</div>
@@ -1416,10 +1412,16 @@ body {
 //            showModal(financial_value);
             message1.textContent = " '금융자산 등 그외 상속재산 가액'을 초과할 수 없습니다. 입력금액을 한도로 계산됩니다"
         }
+        else {
+            message1.textContent = "";
+        }
         if(debt_value < debt_value1){
             //alert('금융채무 가액은 최초에 입력한 "채무 및 공과금 가액"을 초과할 수 없습니다. 한도액인 최초입력금액으로 설정됩니다. 수정하시려면 입력페이지로 돌아가서 입력하시기 바랍니다. ');
             debt_value1 = debt_value;
             message2.textContent = " '채무 및 공과금 가액'을 초과할 수 없습니다. 입력금액을 한도로 계산됩니다."
+        }
+        else {
+            message2.textContent = "";
         }
         var net_fin = Math.max(financial_value1 + financial_value2 - debt_value1,0); //금융공제.은행빚이있는경우차감
 
